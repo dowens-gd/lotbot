@@ -25,14 +25,13 @@ import akka.actor.actorRef2Scala
 import akka.routing.FromConfig
 import io.netty.util.CharsetUtil
 import org.mashupbots.socko.routes.POST
+import scala.reflect.io.Directory
 
 object VeryStaticInternet {
 
-  val contentDir = createTempDir("content_")
-  val tempDir = createTempDir("temp_")
-  val staticContentHandlerConfig = StaticContentHandlerConfig(
-    rootFilePaths = Seq(contentDir.getAbsolutePath),
-    tempDir = tempDir) 
+  // TODO: Add static test resources to project and set as content dir
+  val rootSiteDirectory = new File("src/test/scala/resources").getAbsolutePath();
+  val staticContentHandlerConfig = StaticContentHandlerConfig(Seq(rootSiteDirectory))
 
   //
   // STEP #1 - Define Actors and Start Akka
@@ -88,7 +87,7 @@ object VeryStaticInternet {
   val routes = Routes({
     case HttpRequest(request) => request match {
       case GET() => {
-        staticContentHandlerRouter ! new StaticFileRequest(request, new File(contentDir, request.nettyHttpRequest.getUri()))
+        staticContentHandlerRouter ! new StaticFileRequest(request, new File(rootSiteDirectory, request.nettyHttpRequest.getUri()))
       }
     }
   })
@@ -97,71 +96,17 @@ object VeryStaticInternet {
   // STEP #3 - Start and Stop Socko Web Server
   //
   def main(args: Array[String]) {
-    // Create content
-    createContent(contentDir)
-
     // Start web server
     val webServer = new WebServer(WebServerConfig(), routes, actorSystem)
     Runtime.getRuntime.addShutdownHook(new Thread {
       override def run {
         webServer.stop()
-        contentDir.delete()
-        tempDir.delete()
       }
     })
     webServer.start()
 
-    System.out.println("Content directory is " + contentDir.getAbsolutePath)
-    System.out.println("87 bytes File   : http://localhost:8888/small.html")
-    System.out.println("200K File       : http://localhost:8888/medium.txt")
-    System.out.println("1MB File        : http://localhost:8888/big.txt")    
+    System.out.println("Static content server running on: http://localhost:8888")
+    System.out.println("Content directory is " + rootSiteDirectory)
   }
 
-  /**
-   * Returns a newly created temp directory
-   *
-   * @param namePrefix Prefix to use on the directory name
-   * @return Newly created directory
-   */
-  private def createTempDir(namePrefix: String): File = {
-    val d = File.createTempFile(namePrefix, "")
-    d.delete()
-    d.mkdir()
-    d
-  }
-
-  /**
-   * Create files for downloading
-   */
-  private def createContent(dir: File) {
-    val buf = new StringBuilder()
-
-    // medium.txt - 100K file
-    buf.setLength(0)
-    for (i <- 0 until (1024 * 100)) {
-      buf.append('a')
-    }
-
-    val mediumFile = new File(dir, "medium.txt")
-    val out = new FileOutputStream(mediumFile)
-    out.write(buf.toString.getBytes(CharsetUtil.UTF_8))
-    out.close()
-
-    // big.txt - 1MB file
-    buf.setLength(0)
-    for (i <- 0 until (1024 * 1024)) {
-      buf.append('a')
-    }
-
-    val bigFile = new File(dir, "big.txt")
-    val out2 = new FileOutputStream(bigFile)
-    out2.write(buf.toString.getBytes(CharsetUtil.UTF_8))
-    out2.close()
-
-    // copy over small.html (same file used by vertx)
-//    val fooFile = new File(dir, "small.html")
-//    val out3 = new FileOutputStream(fooFile)
-//    out3.write(IOUtil.readResource("small.html"))
-//    out3.close()
-  }
 }
