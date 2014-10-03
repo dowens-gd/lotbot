@@ -3,7 +3,7 @@
 // https://raw.githubusercontent.com/mashupbots/socko/master/socko-examples/src/main/scala/org/mashupbots/socko/examples/benchmark/BenchmarkApp.scala
 //
 
-package com.technophobia.creep.mock
+package com.technophobia.lotbot.mock
 
 import java.io.File
 import java.io.FileOutputStream
@@ -26,21 +26,29 @@ import akka.routing.FromConfig
 import io.netty.util.CharsetUtil
 import org.mashupbots.socko.routes.POST
 import scala.reflect.io.Directory
+import org.scalatest.Suite
+import org.scalatest.BeforeAndAfterAll
 
-object VeryStaticInternet {
+//limit to specifc class heirachry
+trait VeryStaticInternet extends Suite with BeforeAndAfterAll {
 
-  // TODO: Add static test resources to project and set as content dir
-  val rootSiteDirectory = new File("src/test/scala/resources").getAbsolutePath();
-  val staticContentHandlerConfig = StaticContentHandlerConfig(Seq(rootSiteDirectory))
+  override def beforeAll() {
+    webServer.start()
+  }
 
-  //
-  // STEP #1 - Define Actors and Start Akka
-  //
+  override def afterAll() {
+    webServer.stop();
+  }
+
+  protected var siteAlias = "substeps"
+  protected val rootSiteDirectory = new File("src/test/resources/sites/" + siteAlias).getAbsolutePath()
+  protected val port = 8889
+
   // We are going to start StaticContentHandler actor as a router. There will be 20 instances using a max of 6 threads.
   // Some basic benchmarking indicates that "thread-pool-executor" is better than "fork-join-executor" for
   // StaticContentHandler.
   //
-  val actorConfig = """
+  private val actorConfig = """
 	my-pinned-dispatcher {
 	  type=PinnedDispatcher
 	  executor=thread-pool-executor
@@ -64,8 +72,8 @@ object VeryStaticInternet {
 	  # Set to 1 for as fair as possible.
 	  throughput = 100
 	} 
-    akka {
-	  event-handlers = ["akka.event.slf4j.Slf4jEventHandler"]
+    akka{
+	  loggers = ["akka.event.slf4j.Slf4jLogger"]
 	  loglevel=DEBUG
 	  actor {
 	    deployment {
@@ -77,14 +85,12 @@ object VeryStaticInternet {
 	  }
 	}"""
 
-  val actorSystem = ActorSystem("BenchmarkActorSystem", ConfigFactory.parseString(actorConfig))
-  val staticContentHandlerRouter = actorSystem.actorOf(Props(new StaticContentHandler(staticContentHandlerConfig))
+  private val actorSystem = ActorSystem(siteAlias + "SiteActorSystem", ConfigFactory.parseString(actorConfig))
+
+  private val staticContentHandlerRouter = actorSystem.actorOf(Props(new StaticContentHandler(StaticContentHandlerConfig(Seq(rootSiteDirectory))))
     .withRouter(FromConfig()).withDispatcher("my-dispatcher"), "static-file-router")
 
-  //
-  // STEP #2 - Define Routes
-  //
-  val routes = Routes({
+  private val routes = Routes({
     case HttpRequest(request) => request match {
       case GET() => {
         staticContentHandlerRouter ! new StaticFileRequest(request, new File(rootSiteDirectory, request.nettyHttpRequest.getUri()))
@@ -92,21 +98,6 @@ object VeryStaticInternet {
     }
   })
 
-  //
-  // STEP #3 - Start and Stop Socko Web Server
-  //
-  def main(args: Array[String]) {
-    // Start web server
-    val webServer = new WebServer(WebServerConfig(), routes, actorSystem)
-    Runtime.getRuntime.addShutdownHook(new Thread {
-      override def run {
-        webServer.stop()
-      }
-    })
-    webServer.start()
-
-    System.out.println("Static content server running on: http://localhost:8888")
-    System.out.println("Content directory is " + rootSiteDirectory)
-  }
+  private val webServer: WebServer = new WebServer(WebServerConfig(port = port), routes, actorSystem)
 
 }

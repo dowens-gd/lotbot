@@ -1,4 +1,4 @@
-package com.technophobia.creep.crawlr
+package com.technophobia.lotbot.crawlr
 
 object Crawlr extends App {
   Console.println("Welcome to Crawlr")
