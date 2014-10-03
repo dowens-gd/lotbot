@@ -1,0 +1,326 @@
+/*
+/* =====================================================================
+/* Grid styles
+/* =====================================================================
+*/
+
+/* =Grid columns
+/* ------------------------------------------------------------------ */
+
+$total-columns: 6;
+$column-width: 4em;
+$gutter-width: 2em;
+$container-style: fluid;
+
+$media-layout: 12;
+$media-layout: 30em;
+$media-layout: 30em 12;
+$media-layout: 60em 16;
+$media-layout: 80em 20;
+$media-layout: 100em 24;
+$media-layout: 120em 28;
+$media-layout: 12 60em;
+$media-layout: 30em 60em;
+$media-layout: 30em 12 60em;
+$media-layout: 60em 12 30em;
+$media-layout: 12 lt-ie9;
+
+$break: 12;
+
+@media all and (max-width: 735px) {
+	#banner h1, #banner nav,
+	div.introduction > *,
+	#definition, #sample,
+	#articles, #case-study,
+	#implementation, #assistance {
+		max-width: 80%;
+		margin: 0 auto;
+	}
+
+	// Footer navigation items
+	#nav-level-sitemap, #nav-level-implementations,
+	#nav-level-eclipse, #nav-level-support {
+		max-width: 80%;
+		margin: 0 auto;
+	}
+}
+
+@include at-breakpoint(8) {
+	#banner h1 {
+		@include pre(1);
+		@include span-columns(6 omega, 8);
+		@include post(1);
+	}
+
+	#banner nav.menu {
+		@include pre(1);
+		@include span-columns(6 omega, 8);
+		@include post(1);
+	}
+
+	#definition, #sample {
+		@include pre(1);
+		@include span-columns(6 omega, 8);
+		@include post(1);
+	}
+	
+	#articles, #case-study {
+		@include pre(1);
+		@include span-columns(3, 8);
+	}
+	
+	#implementation, #assistance  {
+		@include span-columns(3 omega, 8);
+		@include post(1);
+	}
+
+	// Footer navigation items
+	#nav-level-sitemap {
+		@include pre(1);
+		@include span-columns(3, 8);
+	}
+
+	#nav-level-implementations {
+		@include span-columns(3 omega, 8);
+		@include post(1);
+	}
+
+	#nav-level-eclipse {
+		@include pre(1);
+		@include span-columns(3, 8);
+	}
+
+	#nav-level-support {
+		@include span-columns(3 omega, 8);
+		@include post(1);
+	}
+
+	#footer div.credits {
+		@include span-columns(8 omega);
+	}
+}
+
+@include at-breakpoint(12) {
+	#banner h1 {
+		@include pre(1);
+		@include span-columns(2, 12);
+		@include post(0);
+	}
+
+	#banner nav.menu {
+		@include pre(0);
+		@include span-columns(8, 12);
+		@include post(1);
+	}
+	
+	#definition, #sample {
+		@include pre(1);
+		@include span-columns(10 omega);
+		@include post(1);
+	}
+	
+	#articles, #case-study {
+		@include pre(1);
+		@include span-columns(5, 12);
+	}
+	
+	#implementation, #assistance  {
+		@include span-columns(5 omega, 12);
+		@include post(1);
+	}
+
+	// Footer navigation items
+	#nav-level-sitemap {
+		@include pre(1);
+		@include span-columns(4, 12);
+	}
+
+	#nav-level-implementations {
+		@include span-columns(4, 12);
+		@include post(1);
+	}
+
+	#nav-level-eclipse {
+		@include pre(1);
+		@include span-columns(4, 12);
+		clear: left;
+	}
+
+	#nav-level-support {
+		@include span-columns(4, 12);
+	}
+
+	#footer div.credits {
+		@include span-columns(3 omega, 12);
+		@include post(1);
+	}
+}
+
+@include at-breakpoint(16) {
+	#banner h1 {
+		@include pre(1);
+		@include span-columns(3, 16);
+	}
+
+	#banner nav.menu {
+		@include pre(0);
+		@include span-columns(11 omega, 16);
+		@include post(1);
+	}
+	
+	#definition, #sample {
+		@include pre(1);
+		@include span-columns(6, 16);
+	}
+	
+	#articles, #case-study {
+		@include pre(0);
+		@include span-columns(4, 16);
+	}
+	
+	#implementation, #assistance  {
+		@include span-columns(4 omega, 16);
+		@include post(1);
+	}
+
+	// Footer navigation items
+	#nav-level-sitemap {
+		@include pre(1);
+		@include span-columns(3, 16);
+	}
+
+	#nav-level-implementations {
+		@include span-columns(3, 16);
+	}
+
+	#nav-level-eclipse {
+		@include pre(0);
+		@include span-columns(3, 16);
+		clear: none;
+	}
+
+	#nav-level-support {
+		@include span-columns(2, 16);
+	}
+
+	#footer div.credits {
+		@include span-columns(3 omega, 16);
+		@include post(1);
+	}
+}
+
+@include at-breakpoint(20) {
+	#banner h1 {
+		@include pre(1);
+		@include span-columns(3, 20);
+	}
+
+	#banner nav.menu {
+		@include span-columns(15 omega, 20);
+		@include post(1);
+	}
+	
+	#definition, #sample {
+		@include pre(1);
+		@include span-columns(7, 20);
+	}
+	
+	#articles, #case-study {
+		@include pre(0);
+		@include span-columns(6, 20);
+	}
+	
+	#implementation, #assistance  {
+		@include span-columns(5 omega, 20);
+		@include post(1);
+	}
+
+	// Footer navigation items
+	#nav-level-sitemap {
+		@include pre(1);
+		@include span-columns(4, 20);
+	}
+
+	#nav-level-implementations {
+		@include span-columns(4, 20);
+	}
+
+	#nav-level-eclipse {
+		@include pre(0);
+		@include span-columns(4, 20);
+	}
+
+	#nav-level-support {
+		@include span-columns(3, 20);
+	}
+
+	#footer div.credits {
+		@include span-columns(3 omega, 20);
+		@include post(1);
+	}
+}
+
+// layout(<$layout-cols>) { <@content> }
+@include layout(6) {
+	
+}
+
+// set-container-width([<$columns>])
+@include at-breakpoint(8) {
+	@include set-container-width;
+}
+
+// with-grid-settings([<columns>, <width>, <gutter>, <padding>]) { <@content> }
+@include with-grid-settings(12,4em,1.5em,1em) {
+	.new-grid {
+		@include container;
+	}
+}
+
+/* =Baseline grid
+/* ------------------------------------------------------------------ */
+
+$base-font-size: 16px;
+$base-line-height: 6px;
+
+@include establish-baseline;
+
+#page {
+	@include adjust-leading-to(4);
+	}
+
+// Set a typographers scale
+h1 {
+	margin: 0 auto rhythm(5, 36px);
+	@include adjust-font-size-to(36px);
+	}
+	
+h2 {
+	margin: 0 auto rhythm(4, 24px);
+	@include adjust-font-size-to(24px);
+	}
+	
+h3 {
+	margin: rhythm(4, 21px) auto rhythm(2, 21px);
+	@include adjust-font-size-to(21px);
+	}
+	
+h4 {
+	margin: rhythm(3, 18px) auto rhythm(1, 18px);
+	@include adjust-font-size-to(18px);
+	}
+	
+h5 {
+	margin: rhythm(3, 16px) auto rhythm(1, 16px);
+	@include adjust-font-size-to(16px);
+	}
+	
+h6 {
+	margin: rhythm(5, 14px) auto rhythm(1, 14px);
+	@include adjust-font-size-to(14px);
+	}
+
+small,
+.meta {
+	@include adjust-font-size-to(12px);
+	}

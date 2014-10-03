@@ -1,0 +1,16 @@
+// =Clearfix
+// ------------------------------------------------------------------ */
+	
+@mixin clearfix {
+	&:after {
+		display: block;
+		clear: both;
+		height: 0;
+		content: "\2003";
+	} 
+}
+
+@mixin clear {
+	display: block;
+	clear: both;
+}

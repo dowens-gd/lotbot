@@ -1,0 +1,27 @@
+// =Font stacks
+// ------------------------------------------------------------------ */
+
+$font-serif: Georgia, Times, "Times New Roman", serif;
+$font-sans-serif: Arial, "Helvetica Neue", Helvetica, sans-serif;
+$font-monospace: Menlo, Monaco, "Courier New", Courier, 'Lucida Sans', Typewriter, 'Lucida Typewriter', monospace;
+$font-family: $font-sans-serif;
+
+@mixin font-shorthand($size: $base-font-size, $weight: normal, $lineHeight: $base-line-height) {
+  font: $weight #{$size}/#{$lineHeight} $font-family;
+    }
+
+@mixin font-serif($size: $base-font-size, $weight: normal, $lineHeight: $base-line-height) {
+  font: $weight #{$size}/#{$lineHeight} $font-serif;
+    }
+
+@mixin font-sans-serif($size: $base-font-size, $weight: normal, $lineHeight: $base-line-height) {
+  font: $weight #{$size}/#{$lineHeight} $font-sans-serif;
+  }
+
+@mixin font-family-monospace {
+  font-family: $font-monospace;
+    }
+
+@mixin font-monospace($size: $base-font-size, $weight: normal, $lineHeight: $base-line-height) {
+  font: $weight #{$size}/#{$lineHeight} $font-monospace;
+    }

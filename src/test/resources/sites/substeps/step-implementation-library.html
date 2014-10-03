@@ -1,0 +1,876 @@
+<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="description" content="Substeps step implementation library. This library defines the various types of steps: Assertions, Clicks, Forms, Location, Miscellaneous, Startup/Shutdown, Tables" />
+			
+			<title>Substeps</title>
+			
+			<link rel="stylesheet" href="css/screen.css" type="text/css" />
+			<link rel="stylesheet" href="css/shCore.css" type="text/css" />
+			<link rel="stylesheet" href="css/shThemeEclipse.css" type="text/css" />
+			<!--[if lte IE 8]>
+			<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+			<![endif]-->
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="js/interface.js"></script>
+			<script type="text/javascript" src="js/libs/modernizr.custom.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shCore.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushJScript.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushXml.js"></script>
+			<script type="text/javascript">
+				SyntaxHighlighter.all()
+			</script>
+t>
+		</head>
+
+		<body ontouchstart>
+			<div class="accessibility" role="note">
+				<p>Accessibility links</p>
+				<a href="#main">Skip to main content</a>
+			</div><!-- / .accessibility -->
+			
+			<div id="page">
+				<header id="banner" role="banner">
+					<h1><a href="index.html" title="Link to home page"><img src="img/substeps-logo.png" alt="Substeps"></a></h1>
+
+					<nav class="menu" id="nav-level-1">
+						<h1 class="visuallyhidden" id="top-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="top-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li class="current"><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+					<!--		<li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li> -->
+						</ul>
+					</nav>
+				</header><!-- / #banner -->
+				
+				<main id="main" role="main">
+					<header>
+						<h2>Step implementation library</h2>
+					</header>
+
+					<section>
+						<header>
+							<h3>Assertions</h3>
+						</header>
+
+						<p>Step implementations that perform various checks on web pages, values, page titles, selections etc.</p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>AssertCheckBox checked=&quot;&lt;checkedString&gt;&quot;</td>
+									<td>AssertCheckBox checked=true/false</td>
+									<td>Check that the current element, a checkbox is checked or not</td>
+								</tr>
+								<tr>
+									<td>AssertChildElementsContainText xpath=&quot;&lt;xpath&gt;&quot; text=&quot;&lt;text&gt;&quot;</td>
+									<td>AssertChildElementsContainText xpath=&quot;li//a&quot; text = &quot;Log Out&quot;</td>
+									<td>From the current element, apply the xpath and check to see if any of the  children have the text &hellip;</td>
+								</tr>
+								<tr>
+									<td>AssertCurrentElement attribute=&quot;&lt;attribute&gt;&quot; value=&quot;&lt;expected&gt;&quot;</td>
+									<td>AssertCurrentElement attribute=&quot;class&quot; value=&quot;icon32x32&quot;</td>
+									<td>Check that the current element has the specified attribute and value</td>
+								</tr>
+								<tr>
+									<td>AssertCurrentElement has attributes=[&lt;attributeString&gt;]</td>
+									<td>AssertCurrentElement has
+
+									attributes=[type=&quot;submit&quot;,value=&quot;Search&quot;]</td>
+									<td>Check that the current element has the specified attributes</td>
+								</tr>
+								<tr>
+									<td>AssertCurrentElement text contains &quot;&lt;expected&gt;&quot;</td>
+									<td>AssertCurrentElement text contains &quot;Hello world&quot;</td>
+									<td>Check that the current element contains the specified text</td>
+								</tr>
+								<tr>
+									<td>AssertCurrentElement text=&quot;&lt;expected&gt;&quot;</td>
+									<td>AssertCurrentElement text=&quot;Hello World!&quot;</td>
+									<td>Check that the current element has the expected text value</td>
+								</tr>
+								<tr>
+									<td>AssertEventuallyContains &lt;elementId&gt; &quot;&lt;text&gt;&quot;</td>
+									<td>AssertEventuallyContains mySpanId &quot;text I eventually expect&quot;</td>
+									<td>Asserts that an element (identified by ID) eventually gets some specific  text inserted into it (by JavaScript, probably)</td>
+								</tr>
+								<tr>
+									<td>AssertNotPresent text=&quot;&lt;text&gt;&quot;</td>
+									<td>AssertNotPresent text="undesirable text"</td>
+									<td>Assert that the specified text is not found within the page</td>
+								</tr>
+								<tr>
+									<td>AssertPageTitle is &quot;&lt;expectedTitle&gt;&quot;</td>
+									<td>AssertPageTitle is "My Home Page"</td>
+									<td>Check that the page title is &hellip;</td>
+								</tr>
+								<tr>
+									<td>AssertRadioButton checked=&quot;&lt;checkedString&gt;&quot;</td>
+									<td>AssertRadioButton checked=true/false</td>
+									<td>Check that the current element, a radio button, is checked or not</td>
+								</tr>
+									<td>AssertTagElementContainsAttribute tag=&quot;&lt;tag&gt;&quot; attributeName=&quot;&lt;attributeName&gt;&quot; attributeValue=&quot;&lt;attributeValue&gt;&quot;</td>
+									<td>AssertTagElementContainsText tag=&quot;ul&quot; attributeName=&quot;class&quot;
+									attributeValue=&quot;a_list&quot;</td>
+									<td>Check that any of the html tags have the specified attribute name and  value</td>
+								</tr>
+								<tr>
+									<td>AssertTagElementContainsText tag=&quot;&lt;tag&gt;&quot; text=&quot;&lt;text&gt;&quot;</td>
+									<td>AssertTagElementContainsText tag=&quot;ul&quot; text=&quot;list item itext&quot;</td>
+									<td>Check that any of the html tags have the specified text</td>
+								</tr>
+								<tr>
+									<td>AssertValue id &lt;id&gt; text = &quot;&lt;expected&gt;&quot;</td>
+									<td>AssertValue id msg_id text = &quot;Hello World&quot;</td>
+									<td>Check that the element with id has the text &hellip;</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<header>
+							<h3>Clicks</h3>
+						</header>
+
+						<p>Step implementations that are concerned with mouse clicks on links, submit buttons etc.</p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>Click</td>
+									<td>Click</td>
+									<td>Click (the current element)</td>
+								</tr>
+
+								<tr>
+									<td>ClickButton &lt;buttonText&gt;</td>
+									<td>ClickButton submit</td>
+									<td>Click a button that has the text &hellip;</td>
+								</tr>
+
+								<tr>
+									<td>ClickById &lt;id&gt;</td>
+									<td>ClickById login</td>
+									<td>Find an element by id, then click it.</td>
+								</tr>
+
+								<tr>
+									<td>ClickLink &quot;&lt;linkText&gt;&quot;</td>
+									<td>ClickLink &quot;Contracts&quot;</td>
+									<td>Click the link "(&hellip;)" as it appears on the page</td>
+								</tr>
+
+								<tr>
+									<td>PerformContextClick</td>
+									<td>PerformContextClick</td>
+									<td>Performs a context click (typically right click, unless
+									this has been changed by the user) on the current element.</td>
+								</tr>
+
+								<tr>
+									<td>PerformDoubleClick</td>
+									<td>PerformDoubleClick</td>
+									<td>Performs a double click on the current element (set with a previous Find method).</td>
+								</tr>
+
+								<tr>
+									<td>Submit</td>
+									<td>Submit</td>
+									<td>Submit the form of the current element. <abbr>NB</abbr> using click is
+									preferable as JavaScript may be executed on click, which this
+									method would bypass</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<header>
+							<h3>Forms</h3>
+						</header>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>AssertRadioButton name=&quot;&lt;name&gt;&quot;, text=&quot;&lt;text&gt;&quot;,
+									checked=&quot;&lt;checked&gt;&quot;</td>
+
+									<td>AssertRadioButton name=&quot;radio_btn_name&quot;, text=&quot;text&quot;,
+									checked=&quot;true&quot;</td>
+
+									<td>Asserts a value of a radio button</td>
+								</tr>
+
+								<tr>
+									<td>ChooseOption &quot;&lt;value&gt;&quot; in current element</td>
+
+									<td>ChooseOption &quot;fred&quot; in current element</td>
+
+									<td>Select a value in the option list in the current element, a
+									Find operation is required immediatebly before</td>
+								</tr>
+
+								<tr>
+									<td>ChooseOption &quot;&lt;value&gt;&quot; in id &lt;id&gt;</td>
+
+									<td>ChooseOption &quot;fred&quot; in id usersList</td>
+
+									<td>Select a value in the option list that has the id</td>
+								</tr>
+
+								<tr>
+									<td>ClearAndSendKeys &quot;&lt;value&gt;&quot;</td>
+
+									<td>ClearAndSendKeys &quot;hello&quot;</td>
+
+									<td>Clear any text from the element, and enter text (to the
+									current element)</td>
+								</tr>
+
+								<tr>
+									<td>ClearAndSendKeys &quot;&lt;value&gt;&quot; to id &lt;id&gt;</td>
+
+									<td>ClearAndSendKeys &quot;fred&quot; to id username</td>
+
+									<td>Find an element by id, clear any text from the element, and
+									enter text</td>
+								</tr>
+
+								<tr>
+									<td>SendKeys &quot;&lt;value&gt;&quot;</td>
+
+									<td>SendKeys hello</td>
+
+									<td>Enters text to the current element, without clearing any
+									current content first</td>
+								</tr>
+
+								<tr>
+									<td>SetCheckBox name=&quot;&lt;name&gt;&quot;,
+									checked=&lt;checked&gt;</td>
+
+									<td>SetCheckBox name=&quot;accept&quot;, checked=true</td>
+
+									<td>Sets a check box value; deprecated use</td>
+								</tr>
+
+								<tr>
+									<td>SetCheckedBox checked=&lt;checked&gt;</td>
+
+									<td>SetCheckedBox checked=true</td>
+
+									<td>Sets the value of the current element, assumed to be a
+									checkbox to&hellip;</td>
+								</tr>
+
+								<tr>
+									<td>SetRadioButton checked=&lt;checked&gt;</td>
+
+									<td>SetRadioButton checked=true</td>
+
+									<td>Sets the value of the current element, assumed to be a
+									radio button to&hellip;</td>
+								</tr>
+
+								<tr>
+									<td>SetRadioButton name=&lt;name&gt;, value=&lt;value&gt;,
+									checked=&lt;checked&gt;</td>
+
+									<td>SetRadioButton name=opt_in, value=OFF, checked=true</td>
+
+									<td>Use: FindRadioButton inside tag=&quot;label&quot; with
+									label=&quot;&lt;radio_button_text&gt;&quot; + SetRadioButton
+									checked=&lt;true&gt; in preference as this will locate the
+									radio button by visible text rather than the underlying value.
+									Locates a radio button with a specific value and checks the
+									radio button.</td>
+								</tr>
+
+								<tr>
+									<td>SetRadioButton name=&quot;&lt;name&gt;&quot;,
+									text=&quot;&lt;text&gt;&quot;</td>
+
+									<td>SetRadioButton name=&quot;opt_in&quot;, text=&quot;radio button text&quot;</td>
+
+									<td>Sets the value of a radio button</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<header>
+							<h3>Location</h3>
+						</header>
+
+						<p>Step implementations that attempt to locate particular elements on the page. Typically, the methods will retry finding the field until the default timeout period is reached. If the element has not been located within that time, the step will fail.</p>
+						<p>These step implementations will set the &lsquo;currentElement&rsquo; and allow the current element to be used in a subsequent step, for selecting a value, for example.</p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>FindById &lt;id&gt;</td>
+
+									<td>FindById username</td>
+
+									<td>Find an element by it&rsquo;s ID</td>
+								</tr>
+
+								<tr>
+									<td>FindByIdTimeout &lt;id&gt; timeout = &lt;timeout&gt;
+									secs</td>
+
+									<td>FindByIdTimeout username timeout = 15 secs</td>
+
+									<td>Find an element by it&rsquo;s ID with the specified timeout</td>
+								</tr>
+
+								<tr>
+									<td>FindByName &quot;&lt;name&gt;&quot;</td>
+
+									<td>FindByName &quot;named field&quot;</td>
+
+									<td>Find an element using the name attribute of the
+									element</td>
+								</tr>
+
+								<tr>
+									<td>FindByTagAndAttributes tag=&quot;&lt;tag&gt;&quot;
+									attributes=[&lt;attributeString&gt;]</td>
+
+									<td>FindByTagAndAttributes tag=&quot;input&quot;
+									attributes=[type=&quot;submit&quot;,value=&quot;Search&quot;]</td>
+
+									<td>Find an element by tag name and a set of attributes and
+									corresponding values</td>
+								</tr>
+
+								<tr>
+									<td>FindByXpath &lt;xpath&gt;</td>
+
+									<td>FindByXpath</td>
+
+									<td>Find an id by xpath</td>
+								</tr>
+
+								<tr>
+									<td>FindCheckbox inside tag=&quot;&lt;tag&gt;&quot; with
+									label=&quot;&lt;label&gt;&quot;</td>
+
+									<td>FindCheckbox inside tag=&quot;label&quot; with label=&quot;a checkbox
+									label&quot;</td>
+
+									<td>Finds a checkbox that is a child of the specified tag, that
+									contains the specified text; eg. &lt;pre&gt; &lt;label&gt;
+									&lt;input type=&quot;checkbox&quot; name=&quot;checkbox_name&quot;
+									value=&quot;yeah&quot;/&gt;a checkbox &lt;span&gt;label&lt;/span&gt;
+									&lt;/label&gt; &lt;/pre&gt;</td>
+								</tr>
+
+								<tr>
+									<td>FindChild ByName name=&quot;&lt;name&gt;&quot;</td>
+
+									<td>FindChild ByName name=&quot;child name&quot;</td>
+
+									<td>Finds an element that is a child of the current element
+									using the name attribute, another Find method should be used
+									first</td>
+								</tr>
+
+								<tr>
+									<td>FindChild ByTagAndAttributes tag=&quot;&lt;tag&gt;&quot;
+									attributes=[&lt;attributeString&gt;]</td>
+
+									<td>FindChild ByTagAndAttributes tag=&quot;input&quot;
+									attributes=[type=&quot;submit&quot;,value=&quot;Search&quot;]</td>
+
+									<td>Finds an element that is a child of the current element
+									using the tag name and specified attributes, another Find
+									method should be used first</td>
+								</tr>
+
+								<tr>
+									<td>FindRadioButton inside tag=&quot;&lt;tag&gt;&quot; with
+									label=&quot;&lt;label&gt;&quot;</td>
+
+									<td>FindRadioButton inside tag=&quot;label&quot; with label=&quot;a radio
+									label&quot;</td>
+
+									<td>Finds a radiobutton that is a child of the specified tag,
+									that contains the specified text; eg. &lt;pre&gt; &lt;label&gt;
+									&lt;input type=&quot;radio&quot; name=&quot;radio_name&quot; value=&quot;yeah&quot;/&gt;a
+									radio &lt;span&gt;label&lt;/span&gt; &lt;/label&gt;
+									&lt;/pre&gt;</td>
+								</tr>
+
+								<tr>
+									<td>FindTagElementContainingText tag=&quot;&lt;tag&gt;&quot;
+									text=&quot;&lt;text&gt;&quot;</td>
+
+									<td>FindTagElementContainingText tag=&quot;ul&quot; text=&quot;list item
+									itext&quot;</td>
+
+									<td>Finds an element on the page with the specified tag and
+									text</td>
+								</tr>
+
+								<tr>
+									<td>NavigateTo &lt;url&gt;</td>
+
+									<td>NavigateTo /myApp (will navigate to http://localhost/myApp
+									if base.url is set to http://localhost)</td>
+
+									<td>Navigate to a url, if the url begins with http or file, the
+									url will be used as is, if a relative url is specified then it
+									will be prepended with the base url property</td>
+								</tr>
+
+								<tr>
+									<td>SwitchFrameToCurrentElement</td>
+
+									<td>SwitchFrameToCurrentElement</td>
+
+									<td>Transfer the focus into the current element (set with a
+									previous Find method) which should be a frame or iframe</td>
+								</tr>
+
+								<tr>
+									<td>WaitFor &lt;value&gt;</td>
+
+									<td>WaitFor 10</td>
+
+									<td>Wait for the specified number of milliseconds</td>
+								</tr>
+
+								<tr>
+									<td>WaitForPageTitle &quot;&lt;expectedTitle&gt;&quot;</td>
+
+									<td>WaitForPageTitle &quot;My Home Page&quot;</td>
+
+									<td>Wait for the page title to change to the specified
+									value</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<header>
+							<h3>Miscellaneous</h3>
+						</header>
+
+						<p>Step implementations which are currently uncategorized (although they should be!)</p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>AssertDifferent rememberedValue
+									&quot;&lt;rememberedValueName&gt;&quot; compareToElement
+									&quot;&lt;elementId&gt;&quot;</td>
+
+									<td>AssertDifferent rememberedValue &quot;savedProjectName&quot;
+									compareToElement &quot;projectName&quot;</td>
+
+									<td>Compare the text of an element (identified by ID) to a
+									value previously remembered</td>
+								</tr>
+
+								<tr>
+									<td>AssertEventuallyNotEmpty id=&quot;&lt;elementId&gt;&quot;</td>
+
+									<td>AssertEventuallyNotEmpty mySpan</td>
+
+									<td>Asserts that an element (identified by ID) eventually gets
+									some text inserted into it (by JavaScript, probably)</td>
+								</tr>
+
+								<tr>
+									<td>AssertPageSourceContains &quot;&lt;expected&gt;&quot;</td>
+
+									<td>AssertPageSourceContains &quot;foobar&quot;</td>
+
+									<td>Simple text search on page source</td>
+								</tr>
+
+								<tr>
+									<td>AssertSame rememberedValue &quot;&lt;rememberedValueName&gt;&quot;
+									compareToElement &quot;&lt;elementId&gt;&quot;</td>
+
+									<td>AssertSame rememberedValue &quot;savedProjectName&quot;
+									compareToElement &quot;projectName&quot;</td>
+
+									<td>Compare the text of an element (identified by ID) to a
+									value previously remembered - assert they're the same</td>
+								</tr>
+
+								<tr>
+									<td>AssertSelect id=&quot;&lt;id&gt;&quot; text=&quot;&lt;value&gt;&quot; is
+									currently selected</td>
+
+									<td></td>
+
+									<td></td>
+								</tr>
+
+								<tr>
+									<td>AssertSelect id=&quot;&lt;id&gt;&quot; text=&quot;&lt;value&gt;&quot; is not
+									currently selected</td>
+
+									<td></td>
+
+									<td></td>
+								</tr>
+
+								<tr>
+									<td>ClickSubmitButton &quot;&lt;buttonText&gt;&quot;</td>
+
+									<td></td>
+
+									<td></td>
+								</tr>
+
+								<tr>
+									<td>DismissAlert with message &quot;&lt;message&gt;&quot;</td>
+
+									<td></td>
+
+									<td></td>
+								</tr>
+
+								<tr>
+									<td>RememberForScenario textFrom &quot;&lt;elementId&gt;&quot; as
+									&quot;&lt;nameToSaveAs&gt;&quot;</td>
+
+									<td>RememberForScenario textFrom &quot;projectName&quot; as
+									&quot;savedProjectName&quot;</td>
+
+									<td>Grab the text of an element (identified by id) and save it
+									for the duration of this scenario</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<header>
+							<h3>Startup / Shutdown</h3>
+						</header>
+
+						<p>Step implementations that can reset the current webdriver session and restart it.</p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>Shutdown</td>
+
+									<td>Shutdown</td>
+
+									<td>Shuts down the current web driver session</td>
+								</tr>
+
+								<tr>
+									<td>Startup</td>
+
+									<td>Startup</td>
+
+									<td>Starts a new web driver session</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<section>
+						<header>
+							<h3>Table</h3>
+						</header>
+
+						<p>Step implementations for navigating and retrieving values from a table.</p>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Expression</th>
+									<th>Example</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>AssertTableValue column &lt;column&gt;, row &lt;row&gt;
+									contains text "&lt;text&gt;"</td>
+
+									<td>AssertTableValue column 2, row 3 contains text "Hello
+									Bob"</td>
+
+									<td>Check that a table cell contains the specified text using a
+									1 based index. Row 0 is the first &lt;tr&gt; beneath a
+									&lt;tbody&gt;</td>
+								</tr>
+
+								<tr>
+									<td>FindElementInRow ByTagAndAttributes tag=&quot;&lt;tag&gt;&quot;
+									attributes=[&lt;attributeString&gt;]</td>
+
+									<td>FindElementInRow ByTagAndAttributes tag=&quot;a&quot;
+									attributes=[class=&quot;link-class&quot;,&hellip;]</td>
+
+									<td>Find an element within a table row by tag and
+									attributes.</td>
+								</tr>
+
+								<tr>
+									<td>FindElementInRow linkText=&quot;&lt;linkText&gt;&quot;</td>
+
+									<td>FindElementInRow linkText=&quot;View&quot;</td>
+
+									<td>Find a link (anchor) element within a table row using the
+									link text as a discriminator.</td>
+								</tr>
+
+								<tr>
+									<td>FindTableBodyRow row &lt;row&gt;</td>
+
+									<td>FindTableBodyRow row 3</td>
+
+									<td>Locates the table body row, assuming that the table has
+									already been located Row 1 is the first &lt;tr&gt; beneath a
+									&lt;tbody&gt;</td>
+								</tr>
+
+								<tr>
+									<td>FindTableRowWithColumnsThatContainText
+									[&lt;columnText&gt;]</td>
+
+									<td>FindTableRowWithColumnsThatContainText [&quot;My Name&quot;,&quot;Where it
+									all began&hellip;&quot;,&quot;December 19 2012&quot;]</td>
+
+									<td>Find a row in a table where columns exist that contain the
+									specified text. Not all columns of the table need to specified,
+									however the order is important. Finding multiple matching
+									results will result in an error. Once the row has been located,
+									other FindInRow methods can be used that may in turn refer to
+									and set the &lsquo;Current Element&rsquo;, this method does not set the
+									current element for that reason.</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Property</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr>
+									<td>base.url</td>
+
+									<td>used as the prefix for NavigateTo &lt;url&gt; instructions.
+									Vary this for targetting at different environments use a
+									relative or absolute path to use the file: protocol</td>
+								</tr>
+
+								<tr>
+									<td>driver.type</td>
+
+									<td>HTMLUNIT, FIREFOX, CHROME</td>
+								</tr>
+
+								<tr>
+									<td>default.webdriver.timeout.secs</td>
+
+									<td>The default value in seconds that webdriver will wait for a
+									given condition</td>
+								</tr>
+
+								<tr>
+									<td>visual.webdriver.close.on.fail</td>
+
+									<td>true by default, if set to false, when using Chrome or
+									Firefox and an error occurs, the browser window is retained to
+									aide debugging</td>
+								</tr>
+
+								<tr>
+									<td>webdriver.shutdown</td>
+
+									<td>true by default, override if you wish to keep the browswer
+									windows open. Beware, this will consume lots of resources!</td>
+								</tr>
+
+								<tr>
+									<td>htmlunit.disable.javascript</td>
+
+									<td>false by default, set to true to disable javascript with
+									HTMLUnit</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</main><!-- / #main -->
+
+				<aside id="complementary" role="complementary">
+                    <section id="sample">
+                        <header>
+                            <h2>Sample project</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've put together a self contained sample project containing a static website and some illustrative Substeps tests.</p>
+                            <p>Download the project and have a play, see how easy it is to build tests using the Substeps libraries and extend with your own functionality</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="sample_project/substeps-webdriver-sample-project-1.1.0.zip" title="Download the sample project here">Download the sample project here</a>
+                        </div>
+                    </section>
+
+					<!--<section id="case-study">
+						<header>
+							<h2>Case studies</h2>
+						</header>
+
+						<div class="content-body">
+							<p>Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus.
+						</div>
+
+						<div class="signpost">
+							<a href="#nowhere" title="Link to case study">Sit amet, consectetur</a>
+						</div>
+					</section>-->
+
+                    <section id="assistance">
+                        <header>
+                            <h2>Help and support</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've setup a Google group where you can raise issues, receive support and answers to any Substep related questions you may have.</p>
+                            <p>We also announce new releases here too.</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="http://groups.google.com/group/substeps?hl=en-GB" title="Link to Substeps Google group discussion forum">Substeps Google group</a>
+                        </div>
+                    </section>
+				</aside><!-- / #complementary -->
+				
+				<footer id="footer" role="contentinfo">
+					<nav class="menu" id="nav-level-sitemap">
+						<h1 class="visuallyhidden" id="sitemap-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="sitemap-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-implementations">
+						<h1 class="visuallyhidden" id="implementations-level-nav-label">Implementing Substeps information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="implementations-level-nav-label">
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="step-implementations.html#webdriver" title="Navigate to &lsquo;Webdriver&rsquo; page" role="button">Webdriver</a></li>
+							<li><a href="step-implementations.html#email-substeps" title="Navigate to &lsquo;Email&rsquo; page" role="button">Email</a></li>
+						<!-- 	<li><a href="#nowhere" title="Navigate to &lsquo;Database&rsquo; page" role="button">Database</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-eclipse">
+						<h1 class="visuallyhidden" id="eclipse-level-nav-label">Eclipse plugin information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="eclipse-level-nav-label">
+							<li><a href="eclipse-plugin.html#install" title="Navigate to &lsquo;Install&rsquo; page" role="button">Install</a></li>
+							<li><a href="eclipse-plugin.html#benefits" title="Navigate to &lsquo;Benefits&rsquo; page" role="button">Benefits</a></li>
+							<li><a href="eclipse-plugin.html#usage" title="Navigate to &lsquo;Usage&rsquo; page" role="button">Usage</a></li>
+							<li><a href="eclipse-plugin.html#configuration" title="Navigate to &lsquo;Configuration&rsquo; page" role="button">Configuration</a></li>
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-support">
+						<h1 class="visuallyhidden" id="support-level-nav-label">Support level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="support-level-nav-label">
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="#nowhere" title="Navigate to &lsquo;Downloads&rsquo; page" role="button">Downloads</a></li>  -->
+							<li><a href="support.html#getting-involved" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>
+						</ul>
+					</nav>
+
+					<div class="credits">
+						<p>
+							Created by
+							<a href="http://technophobia.com" title="Visit Technophobia site" rel="external">
+								<img src="img/tp-logo.png" alt="Technophobia, part of Capita plc." />
+								<em>Visit Technophobia site</em>
+							</a>
+						</p>
+					</div>
+				</footer>
+			</div><!-- / #page -->
+		</body>
+	</html>

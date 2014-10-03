@@ -1,0 +1,563 @@
+<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="description" content="Substeps: instructions on how to get started using Substeps with Maven and Ant" />
+			
+			<title>Substeps</title>
+			
+			<link rel="stylesheet" href="css/screen.css" type="text/css" />
+			<link rel="stylesheet" href="css/shCore.css" type="text/css" />
+			<link rel="stylesheet" href="css/shThemeEclipse.css" type="text/css" />
+			<!--[if lte IE 8]>
+			<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+			<![endif]-->
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="js/interface.js"></script>
+			<script type="text/javascript" src="js/libs/modernizr.custom.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shCore.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushJava.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushXml.js"></script>
+			<script type="text/javascript">
+				SyntaxHighlighter.all()
+			</script>
+		</head>
+
+		<body ontouchstart>
+			<div class="accessibility" role="note">
+				<p>Accessibility links</p>
+				<a href="#main">Skip to main content</a>
+			</div><!-- / .accessibility -->
+			
+			<div id="page">
+				<header id="banner" role="banner">
+					<h1><a href="index.html" title="Link to home page"><img src="img/substeps-logo.png" alt="Substeps"></a></h1>
+
+					<nav class="menu" id="nav-level-1">
+						<h1 class="visuallyhidden" id="top-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="top-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li class="current"><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+					<!--		<li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li> -->
+						</ul>
+					</nav>
+				</header><!-- / #banner -->
+				
+				<main id="main" role="main">
+					<header>
+						<h2>Getting started with Substeps</h2>
+					</header>
+
+					<nav class="menu" id="nav-level-2">
+						<h1 id="second-level-nav-label">Page contents:</h1>
+					
+						<ul role="navigation" aria-labelledby="second-level-nav-label">
+							<li><a href="#manual-maven" title="Jump to &lsquo;Manual setup (Maven)&rsquo; section" role="button">Manual setup (Maven)</a></li>
+							<li><a href="#continuous-maven" title="Jump to &lsquo;Continuous integration (using Maven)&rsquo; section" role="button">Continuous integration (using Maven)</a></li>
+							<li><a href="#pom-maven" title="Jump to &lsquo;An example Maven Project Object Model (POM)&rsquo; section" role="button">An example Maven Project Object Model (POM)</a></li>
+							<li><a href="#manual-ant" title="Jump to &lsquo;Manual setup (Ant)&rsquo; section" role="button">Manual setup (Ant)</a></li>
+						</ul>
+					</nav>
+					
+					<section>
+						<header id="manual-maven">
+							<h3>Manual Setup (Maven)</h3>
+						</header>
+
+						<div class="content-block">
+							<p>These instructions are for building a maven based project.</p>
+
+							<ol>
+								<li>Create an &lsquo;acceptance-test&rsquo; project.</li>
+								<li>
+									<p>Include the substeps dependencies</p>
+									<p>Firstly add a dependency on the Substeps Bill of Materials (<abbr>BOM</abbr>)</p>
+
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+										<dependency>
+								        	<groupId>com.technophobia.substeps</groupId>
+								        	<artifactId>substeps-bom</artifactId>
+								        	<version>1.1.0</version>
+								        	<type>pom</type>
+								        	<scope>test</scope>
+								        </dependency>]]>
+									</script>
+
+									<p>This will include substeps core as well as compatible versions of substeps runners.</p>
+									<p>If you wish to run acceptance tests against a web application using selenium webdriver you'll need to add a further dependency:</p>
+
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+										<dependency>
+											<groupId>com.technophobia.substeps</groupId>
+											<artifactId>webdriver-substeps</artifactId>
+											<version>1.1.0</version>
+											<scope>test</scope>
+										</dependency>]]>
+									</script>
+
+									<p>If you wish to create your own or use other step implementations then include them as further test dependencies.</p>
+									<p>Check <a href="http://search.maven.org/#search|ga|1|com.technophobia.substeps" title="Link to Maven Central documentation" rel="external">Maven Central</a> for the latest versions of these libraries.</p>
+								</li>
+								<li>Create a directory on the classpath to contain your feature files or sub-directories of feature files (eg <code>src/test/resources/features</code>)</li>
+								<li>Create a directory on the classpath to contain substep files (eg <code>src/test/resources/substeps</code>)</li>
+								<li>
+									<p>Create a JUnit class to run the tests in &lsquo;development&rsquo; mode:</p>
+
+									<script type="syntaxhighlighter" class="brush: java">
+										<![CDATA[
+										@SubStepsConfiguration(	featureFile = "./target/test-classes/features", 
+																subStepsFile = "./target/test-classes/substeps", 
+																stepImplementations = {BaseWebdriverSubStepImplementations.class })
+										@RunWith(JunitFeatureRunner.class)
+										public class AcceptanceTestsRunner {
+											// no op
+										}]]>
+									</script>
+
+									<p>If you have bespoke step implementations then add to the list of step implementations above. Additional properties can also be specified, see the JUnit Runner for more details.</p>
+								<li>
+									<p>create a configuration file <code>localhost.properties</code> and place in the classpath (<code>src/test/resources</code>). This property file will contain all of the environment settings for substeps. Substep libraries might each include their own set of default properties, the values in this file will override the defaults.</p>
+								</li>
+								<li>To run the tests: Simply run the class as a Junit test; in Eclipse select the <code>AcceptanceTestsRunner</code> class, right click and select Run As, JUnit test</li>
+							</ol>
+						</div>
+					</section>
+
+					<section>
+						<header class="subtitle" id="continuous-maven">
+							<h2>Continuous integration (using Maven)</h2>
+						</header>
+
+						<div class="content-block">
+							<p>The substeps maven plugin can execute a number of configurations as part of an integration test.</p>
+
+							<p>Each configuration can be tailored to use specific properties, sets of tests or alternate initialisation classes and or step implementations. The plugin adds all the dependencies of the project to it's own set of dependencies to avoid duplication in the pom.</p>
+
+							<script type="syntaxhighlighter" class="brush: xml">
+								<![CDATA[
+									<plugin>
+								      <groupId>com.technophobia.substeps</groupId>
+								      <artifactId>substeps-runner</artifactId>
+								      <!-- Note with Maven 3 there is no need to explicitly specify the version number 
+								        if you have imported the bom as shown above. -->
+
+								      <executions>
+								          <execution>
+								              <id>SubSteps Test</id>
+								              <phase>integration-test</phase>
+								              <goals>
+								                  <goal>run-features</goal>
+								              </goals>
+								          </execution>
+								      </executions>
+								      <configuration>
+								      ...]]>
+							</script>
+
+							<p>See the <a href="runner/mavensite/index.html" title="Link to Substeps Maven Site">Substeps Maven Site</a> for full details of the parameters and options available.</p>
+						</div>
+					</section>
+
+					<section>
+						<header class="subtitle" id="pom-maven">
+							<h2>An example Maven Project Object Model (<abbr>POM</abbr>)</h2>
+						</header>
+
+						<div class="content-block">
+							<p>This example <abbr>POM</abbr> is adapted from the sample project, feel free to copy:</p>
+
+							<script type="syntaxhighlighter" class="brush: xml">
+								<![CDATA[
+									&lt;?xml version="1.0" encoding="UTF-8"?>
+									<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+											xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+										<modelVersion>4.0.0</modelVersion>
+
+										<!-- This is a sample pom configuration for building a suite of substep acceptance tests based on the 
+										webdriver step implementations -->
+
+										<!-- Change these values to something appropriate for your organisation and project -->
+										<groupId>com.technophobia.substeps</groupId>
+										<artifactId>webdriver-substeps-example</artifactId>
+										<version>1.1.0</version>
+
+										<packaging>jar</packaging>
+										<name>Webdriver Substeps Example</name>
+										<description>An example webdriver substeps project</description>
+
+										<licenses>
+											<license>
+												<name>LGPL 3.0 license</name>
+												<url>http://www.opensource.org/licenses/lgpl-3.0.html</url>
+												<distribution>manual</distribution>
+											</license>
+										</licenses>
+
+										<properties>
+											<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+											<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+											<selenium.version>2.25.0</selenium.version>
+											<hamcrest.version>1.3.RC2</hamcrest.version>
+											<junit.version>4.10</junit.version>
+
+											<substeps.bom.version>1.1.0</substeps.bom.version>
+											<substeps.webdriver.version>1.1.0</substeps.webdriver.version>
+										</properties>
+
+										<dependencies>
+
+											<dependency>
+												<groupId>javax.activation</groupId>
+												<artifactId>activation</artifactId>
+												<version>1.1.1</version>
+											</dependency>
+
+											<!-- Adding a dependency on the substeps bom will bring in the substeps core and everything else 
+											needed to build and run -->
+
+											<dependency>
+												<groupId>com.technophobia.substeps</groupId>
+												<artifactId>substeps-bom</artifactId>
+												<version>${substeps.bom.version}</version>
+												<type>pom</type>
+												<scope>test</scope>
+											</dependency>
+
+											<!-- You'll also need dependencies on any step implementations you're going to use -->
+
+											<dependency>
+												<groupId>com.technophobia.substeps</groupId>
+												<artifactId>webdriver-substeps</artifactId>
+												<version>${substeps.webdriver.version}</version>
+												<scope>test</scope>
+											</dependency>
+
+										</dependencies>
+
+										<profiles>
+
+											<!-- In this example, the running of the acceptance tests is defined within a profile, during the 
+											integration-test phase of the maven build. See the substeps-runner documentation for more details. -->
+
+											<profile>
+												<id>acceptance-tests</id>
+												<activation>
+													<activeByDefault>true</activeByDefault>
+												</activation>
+												<build>
+													<plugins>
+														<plugin>
+															<groupId>com.technophobia.substeps</groupId>
+															<artifactId>substeps-maven-plugin</artifactId>
+
+															<executions>
+																<execution>
+																	<id>SubSteps Test</id>
+																	<phase>integration-test</phase>
+																	<goals>
+																		<goal>run-features</goal>
+																	</goals>
+																</execution>
+															</executions>
+
+															<configuration>
+
+																<!-- Since 1.1.0 substeps executes tests in a forked jvm by default, set this parameter 
+																to false to instead execute within the jvm running maven -->
+																<runTestsInForkedVM>true</runTestsInForkedVM>
+
+																<!-- If executing in a forked jvm, the substeps runner will start that jvm with any arguments 
+																specified in the vmArgs parameter -->
+																<vmArgs>-Xmx1024m</vmArgs>
+
+																<executionConfigs>
+
+																	<!-- One or more 'execution configurations', use multiple configs for different test 
+																	initialisation, phases of project, etc -->
+
+																	<executionConfig>
+																		<description>Self Test Features</description> <!-- This appears at the root of the results report -->
+
+																		<tags>@all</tags>  
+																		<!-- optional - If the feature or scenario has this tag, then it will be included, otherwise it won't,
+																		tags are space separated -->
+
+																		<fastFailParseErrors>false</fastFailParseErrors> 
+																		<!-- optional - if true any parse errors will fail the build immediately, rather than attempting to 
+																		execute as much as possible and fail those tests that can't be parsed -->
+
+																		<featureFile>${basedir}/target/test-classes/features</featureFile> 
+																		<!-- path to the feature file, or directory containing the feature files -->
+																		<subStepsFileName>${basedir}/target/test-classes/substeps</subStepsFileName> 
+																		<!-- path to directory of substep files, or a single substep file -->
+
+																		<!-- List of classes containing step implementations -->
+																		<stepImplementationClassNames>
+																			<param>com.technophobia.webdriver.substeps.impl.BaseWebdriverSubStepImplementations</param>
+																			<param>com.technophobia.webdriver.substeps.example.ExampleCustomWebdriverStepImplementations</param>
+																		</stepImplementationClassNames>
+
+																	</executionConfig>
+																</executionConfigs>
+
+																<!-- Default HTML report builder -->
+																<executionReportBuilder
+																	implementation="com.technophobia.substeps.report.DefaultExecutionReportBuilder">
+																	<!-- The directory in which the test execution report will be written to -->
+																	<outputDirectory>${project.build.directory}</outputDirectory>
+																	<!-- report title is used in the HTML test report -->
+																	<reportTitle>Webdriver Substeps Example Report -
+																	${project.version}</reportTitle>
+																</executionReportBuilder>
+
+															</configuration>
+														</plugin>
+													</plugins>
+												</build>
+											</profile>
+
+										</profiles>
+
+										<!-- this section may be unnecessary depending on your maven configuration -->
+										<build>
+											<finalName>${project.artifactId}</finalName>
+											<plugins>
+
+												<plugin>
+													<groupId>org.apache.maven.plugins</groupId>
+													<artifactId>maven-compiler-plugin</artifactId>
+													<configuration>
+														<source>1.5</source>
+														<target>1.5</target>
+														<inherit>true</inherit>
+														<encoding>${project.build.sourceEncoding}</encoding>
+													</configuration>
+												</plugin>
+											</plugins>
+										</build>
+									</project>]]>
+							</script>
+						</div>
+					</section>
+
+					<section>
+						<header class="subtitle" id="manual-ant">
+							<h2>Manual setup (Ant)</h2>
+						</header>
+
+						<div class="content-block">
+							<p>These instructions are for building an Ant-based project:</p>
+
+							<ol>
+								<li>Create a project structure of your choice</li>
+								<li>Import the substeps namespace into the build.xml</li>
+								<li>Define an Ant taskdef to allow usage of the custom Ant task</li>
+								<li>Add a target to run your SubSteps configuration</li>
+								<li>Create a directory on the classpath to contain your feature files or sub-directories of feature files (eg <code>src/test/resources/features</code>).</li>
+								<li>Create a directory on the classpath to contain substep files (eg <code>src/test/resources/substeps</code>).</li>
+								<li>
+									<p>Create a junit class to run the tests in &lsquo;development&rsquo; mode:</p>
+
+									<script type="syntaxhighlighter" class="brush: java">
+										<![CDATA[
+											@SubStepsConfiguration(featureFile = "./target/test-classes/features", 
+											                       subStepsFile = "./target/test-classes/substeps", 
+											                       stepImplementations = {BaseWebdriverSubStepImplementations.class })
+											@RunWith(JunitFeatureRunner.class)
+											public class AcceptanceTestsRunner {
+											    // no op
+											}]]>
+									</script>
+
+									<p>If you have bespoke step implementations then add to the list of step implementations above. Additional properties can also be specified see the Junit Runner for more details</p>
+								</li>
+								<li>Create a configuration file <code>localhost.properties</code> and place in the classpath (<code>src/test/resources</code>). This property file will contain all of the environment settings for substeps. Substep libraries might each include their own set of default properties, the values in this file will override the defaults.</li>
+								<li>To run the tests: Simply run the class as a Junit test; in Eclipse select the <code>AcceptanceTestsRunner</code> class, right click and select Run As, junit test.</li>
+								<li>
+									<p>An example build.xml file:</p>
+
+									<script type="syntaxhighlighter" class="brush: xml">
+										<![CDATA[
+											<project name="MyProject" default="run-substeps" basedir="." xmlns:substeps="antlib:com.technophobia.substeps">
+												<description>
+													Simple example build file to demonstrate using SubSteps with ANT
+												</description>
+
+												<property name="src" location="src/main/java" />
+												<property name="build" location="build" />
+
+
+												<path id="cp">
+
+													<!-- you can list the dependencies individually like this -->
+
+													<pathelement location="${user.home}/.m2/repository/com/technophobia/substeps/substeps-core/1.1.0/substeps-core-1.1.0.jar"/>
+													<pathelement location="${user.home}/.m2/repository/ch/qos/logback/logback-classic/1.0.6/logback-classic-1.0.6.jar"/>
+													<pathelement location="${user.home}/.m2/repository/ch/qos/logback/logback-core/1.0.6/logback-core-1.0.6.jar"/>
+													<pathelement location="${build}" />
+
+													<!-- or get Maven to build the dependency list as a one off operation and include 
+													jars with a filter (see the example project for more details)
+
+													<fileset dir="target/ant-dependencies-substeps">
+													<include name="*.jar" />
+													</fileset>
+
+													<fileset dir="target/ant-dependencies-third-party">
+													<include name="*.jar" />
+													</fileset>
+													-->
+
+												</path>
+
+												<target name="clean">
+													<delete dir="${build}"/>
+												</target>
+
+												<target name="compile" depends="init">
+													<javac srcdir="${src}" destdir="${build}" classpathref="cp" />
+												</target>
+
+												<target name="init">
+													<mkdir dir="${build}"/>
+												</target>
+
+												<target name="run-substeps" depends="compile">
+													<taskdef uri="antlib:com.technophobia.substeps"
+															 resource="substeps.xml"
+															 classpathref="cp" />
+
+													<substeps:substeps>
+														<substeps:executionConfig featureFile="${basedir}/features" subStepsFileName="${basedir}/substeps">
+															<substeps:stepImplementationClassNames>
+																<substeps:param>com.technophobia.example.Steps</substeps:param>
+															</substeps:stepImplementationClassNames>
+
+															<substeps:initialisationClass>
+																<substeps:param>com.technophobia.example.Init</substeps:param>
+															</substeps:initialisationClass>
+														</substeps:executionConfig>
+													</substeps:substeps>
+												</target>
+											</project>]]>
+									</script>
+								</li>
+							</ol>
+						</div>
+					</section>
+				</main><!-- / #main -->
+
+				<aside id="complementary" role="complementary">
+                    <section id="sample">
+                        <header>
+                            <h2>Sample project</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've put together a self contained sample project containing a static website and some illustrative Substeps tests.</p>
+                            <p>Download the project and have a play, see how easy it is to build tests using the Substeps libraries and extend with your own functionality</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="sample_project/substeps-webdriver-sample-project-1.1.0.zip" title="Download the sample project here">Download the sample project here</a>
+                        </div>
+                    </section>
+
+					<!--<section id="case-study">
+						<header>
+							<h2>Case studies</h2>
+						</header>
+
+						<div class="content-body">
+							<p>Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus.
+						</div>
+
+						<div class="signpost">
+							<a href="#nowhere" title="Link to case study">Sit amet, consectetur</a>
+						</div>
+					</section>-->
+
+                    <section id="assistance">
+                        <header>
+                            <h2>Help and support</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've setup a Google group where you can raise issues, receive support and answers to any Substep related questions you may have.</p>
+                            <p>We also announce new releases here too.</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="http://groups.google.com/group/substeps?hl=en-GB" title="Link to Substeps Google group discussion forum">Substeps Google group</a>
+                        </div>
+                    </section>
+				</aside><!-- / #complementary -->
+				
+				<footer id="footer" role="contentinfo">
+					<nav class="menu" id="nav-level-sitemap">
+						<h1 class="visuallyhidden" id="sitemap-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="sitemap-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-implementations">
+						<h1 class="visuallyhidden" id="implementations-level-nav-label">Implementing Substeps information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="implementations-level-nav-label">
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="step-implementations.html#webdriver" title="Navigate to &lsquo;Webdriver&rsquo; page" role="button">Webdriver</a></li>
+							<li><a href="step-implementations.html#email-substeps" title="Navigate to &lsquo;Email&rsquo; page" role="button">Email</a></li>
+						<!-- 	<li><a href="#nowhere" title="Navigate to &lsquo;Database&rsquo; page" role="button">Database</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-eclipse">
+						<h1 class="visuallyhidden" id="eclipse-level-nav-label">Eclipse plugin information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="eclipse-level-nav-label">
+							<li><a href="eclipse-plugin.html#install" title="Navigate to &lsquo;Install&rsquo; page" role="button">Install</a></li>
+							<li><a href="eclipse-plugin.html#benefits" title="Navigate to &lsquo;Benefits&rsquo; page" role="button">Benefits</a></li>
+							<li><a href="eclipse-plugin.html#usage" title="Navigate to &lsquo;Usage&rsquo; page" role="button">Usage</a></li>
+							<li><a href="eclipse-plugin.html#configuration" title="Navigate to &lsquo;Configuration&rsquo; page" role="button">Configuration</a></li>
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-support">
+						<h1 class="visuallyhidden" id="support-level-nav-label">Support level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="support-level-nav-label">
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="#nowhere" title="Navigate to &lsquo;Downloads&rsquo; page" role="button">Downloads</a></li>  -->
+							<li><a href="support.html#getting-involved" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>
+						</ul>
+					</nav>
+
+					<div class="credits">
+						<p>
+							Created by
+							<a href="http://technophobia.com" title="Visit Technophobia site" rel="external">
+								<img src="img/tp-logo.png" alt="Technophobia, part of Capita plc." />
+								<em>Visit Technophobia site</em>
+							</a>
+						</p>
+					</div>
+				</footer>
+			</div><!-- / #page -->
+		</body>
+	</html>

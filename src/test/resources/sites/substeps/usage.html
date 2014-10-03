@@ -1,0 +1,300 @@
+<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="description" content="Substeps migration of projects to version 1.1.0" />
+			
+			<title>Substeps</title>
+			
+			<link rel="stylesheet" href="css/screen.css" type="text/css" />
+			<link rel="stylesheet" href="css/shCore.css" type="text/css" />
+			<link rel="stylesheet" href="css/shThemeEclipse.css" type="text/css" />
+			<!--[if lte IE 8]>
+			<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+			<![endif]-->
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="js/interface.js"></script>
+			<script type="text/javascript" src="js/libs/modernizr.custom.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shCore.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushJScript.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushJava.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushXml.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushSubsteps.js"></script>
+			<script type="text/javascript">
+				SyntaxHighlighter.all()
+			</script>
+		</head>
+
+		<body ontouchstart>
+			<div class="accessibility" role="note">
+				<p>Accessibility links</p>
+				<a href="#main">Skip to main content</a>
+			</div><!-- / .accessibility -->
+			
+			<div id="page">
+				<header id="banner" role="banner">
+					<h1><a href="index.html" title="Link to home page"><img src="img/substeps-logo.png" alt="Substeps"></a></h1>
+
+					<nav class="menu" id="nav-level-1">
+						<h1 class="visuallyhidden" id="top-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="top-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li class="current"><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+					<!--		<li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li> -->
+						</ul>
+					</nav>
+				</header><!-- / #banner -->
+				
+				<main id="main" role="main">
+					<header>
+						<h2>Quick overview</h2>
+					</header>
+
+					<section>
+						<section>
+							<header>
+								<h3>Simple example</h3>
+							</header>
+
+							<div class="content-block">
+								<p>The example below illustrates the use of Substeps to test a web application, so for this particular case we would use the Webdriver-Substeps step defintitions.</p>
+								<script type="syntaxhighlighter" class="brush: substeps">
+									<![CDATA[
+									# A comment 
+									Tags: phase1
+
+									Feature: A Feature to demonstrate Substeps
+
+									Scenario: A simple high level scenario
+										Given a user is logged in to the application
+										Then they can edit their profile
+										And post messages to their friends
+									]]>
+								</script>
+							</div>
+						</section>
+
+						<section>
+							<header>
+								<h3>An example Substeps definitions file</h3>
+							</header>
+
+							<div class="content-block">
+								<script type="syntaxhighlighter" class="brush: substeps">
+									<![CDATA[
+									# Substep definitions for .... 
+									Define: Given a user is logged in to the application
+										NavigateTo /index.html
+										ClickLink "Login"
+										WaitForPageTitle "Login in to your account"
+										ClearAndSendKeys "testuser1" to id login_id
+										ClearAndSendKeys "password" to id password_id
+										FindByTagAndAttributes tag="input" attributes=[type="submit",value="Login"]
+										WaitForPageTitle "your Profile"
+
+									Define: Then they can edit their profile
+										...
+
+									Define: And post messages to their friends
+										...]]>
+								</script>
+								<ul>
+									<li>In the simple example above, you can see how steps within a scenario can be broken down into a series of Substeps</li>
+									<li>The feature and scenario remain descriptive, whilst the Substep definitions contain the details of how that particular step is implemented</li>
+									<li>Substep definitions can call each other, and other scenarios too</li>
+								</ul>
+							</div>
+						</section>
+
+						<section>
+							<header>
+								<h3>A complex example</h3>
+							</header>
+
+							<p>A more elaborate example is illustrated below, again with a web application under test.</p>
+							<p>Additional step definition libraries and custom implementations can be used alongside to provide extra functionality.</p>
+							<script type="syntaxhighlighter" class="brush: substeps">
+								<![CDATA[
+								Feature: A more complex feature
+
+								# Background steps are defined once per feature and executed before each scenario 
+								Background: Given the new user doesn’t exist 
+
+								Scenario: As an administrator I can 'do stuff'
+									Given I can log in as "administrator"
+									Then I can create a new user
+									# Outline scenarios are executed repeatedly, once for each row of the Examples table following the scenario. 
+									# Variables from the table are substituted.
+
+								Scenario Outline: I can log in with different users
+									Given I can log in as "<username>"
+									# at runtime, the username token will be replaced with a value from the table below 
+									Then I am greeted by my "<name>"
+									And my role is displayed as "<role_name>"
+
+								Examples: 
+									|username	|name		|role_name		|
+									|admin		|Andy Admin	|Administrator	|
+									|boss		|Sue Super	|Supervisor		|
+									|user		|Bob Smith	|User			|]]>
+							</script>
+
+							<script type="syntaxhighlighter" class="brush: substeps">
+								<![CDATA[
+								# Substep definitions for a complex feature…
+								Define: Given I can log in as "<user_name>"
+									# This substep is passed a parameter which we can refer to by its name, <user_name> in this case 
+									NavigateTo /index.html
+									ClickLink "Login"
+									WaitForPageTitle "Login in to your account"
+									ClearAndSendKeys "<user_name>" to id login_id
+									ClearAndSendKeys "password" to id password_id
+									FindByTagAndAttributes tag="input" attributes=[type="submit",value="Login"]
+									WaitForPageTitle "your Profile"
+
+								Define: Then I am greeted by my "<name>"
+									FindById welcome-div
+									AssertCurrentElement text contains "<name>"
+
+								Define: Given the new user doesn’t exist
+									DeleteUserFromDB "Nev Newbie" # a custom step implementation for this project 
+									...
+
+								Define: And my role is displayed as "<role_name>"
+									...
+
+								Define: Then I can create users
+									# substeps to actually create a user 
+									...]]>
+							</script>
+
+							<p>Substep definitions can also call other substeps, not just step implementations.</p>
+							<p>Implementing bespoke step implementations is straight forward too, see here for more details</p>
+
+							<script type="syntaxhighlighter" class="brush: java">
+								<![CDATA[
+								 @StepImplementations
+								public class MyProjectStepImplementations {
+
+									@Step("DeleteUserFromDB \"([^\"]*)\")
+									public void deleteUserFromDB(final String name) {
+										// get connection
+										// execute SQL
+										...]]>
+							</script>
+						</section>
+					</section>
+				</main><!-- / #main -->
+
+				<aside id="complementary" role="complementary">
+                    <section id="sample">
+                        <header>
+                            <h2>Sample project</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've put together a self contained sample project containing a static website and some illustrative Substeps tests.</p>
+                            <p>Download the project and have a play, see how easy it is to build tests using the Substeps libraries and extend with your own functionality</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="sample_project/substeps-webdriver-sample-project-1.1.0.zip" title="Download the sample project here">Download the sample project here</a>
+                        </div>
+                    </section>
+
+					<!--<section id="case-study">
+						<header>
+							<h2>Case studies</h2>
+						</header>
+
+						<div class="content-body">
+							<p>Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus.
+						</div>
+
+						<div class="signpost">
+							<a href="#nowhere" title="Link to case study">Sit amet, consectetur</a>
+						</div>
+					</section>-->
+
+                    <section id="assistance">
+                        <header>
+                            <h2>Help and support</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've setup a Google group where you can raise issues, receive support and answers to any Substep related questions you may have.</p>
+                            <p>We also announce new releases here too.</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="http://groups.google.com/group/substeps?hl=en-GB" title="Link to Substeps Google group discussion forum">Substeps Google group</a>
+                        </div>
+                    </section>
+				</aside><!-- / #complementary -->
+				
+				<footer id="footer" role="contentinfo">
+					<nav class="menu" id="nav-level-sitemap">
+						<h1 class="visuallyhidden" id="sitemap-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="sitemap-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-implementations">
+						<h1 class="visuallyhidden" id="implementations-level-nav-label">Implementing Substeps information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="implementations-level-nav-label">
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="step-implementations.html#webdriver" title="Navigate to &lsquo;Webdriver&rsquo; page" role="button">Webdriver</a></li>
+							<li><a href="step-implementations.html#email-substeps" title="Navigate to &lsquo;Email&rsquo; page" role="button">Email</a></li>
+						<!-- 	<li><a href="#nowhere" title="Navigate to &lsquo;Database&rsquo; page" role="button">Database</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-eclipse">
+						<h1 class="visuallyhidden" id="eclipse-level-nav-label">Eclipse plugin information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="eclipse-level-nav-label">
+							<li><a href="eclipse-plugin.html#install" title="Navigate to &lsquo;Install&rsquo; page" role="button">Install</a></li>
+							<li><a href="eclipse-plugin.html#benefits" title="Navigate to &lsquo;Benefits&rsquo; page" role="button">Benefits</a></li>
+							<li><a href="eclipse-plugin.html#usage" title="Navigate to &lsquo;Usage&rsquo; page" role="button">Usage</a></li>
+							<li><a href="eclipse-plugin.html#configuration" title="Navigate to &lsquo;Configuration&rsquo; page" role="button">Configuration</a></li>
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-support">
+						<h1 class="visuallyhidden" id="support-level-nav-label">Support level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="support-level-nav-label">
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="#nowhere" title="Navigate to &lsquo;Downloads&rsquo; page" role="button">Downloads</a></li>  -->
+							<li><a href="support.html#getting-involved" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>
+						</ul>
+					</nav>
+
+					<div class="credits">
+						<p>
+							Created by
+							<a href="http://technophobia.com" title="Visit Technophobia site" rel="external">
+								<img src="img/tp-logo.png" alt="Technophobia, part of Capita plc." />
+								<em>Visit Technophobia site</em>
+							</a>
+						</p>
+					</div>
+				</footer>
+			</div><!-- / #page -->
+		</body>
+	</html>

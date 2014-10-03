@@ -1,0 +1,9 @@
+// =Hiding elements
+// ------------------------------------------------------------------ */
+
+@mixin clear {display: block; clear: both;}
+@mixin hidden {display: none !important; visibility: hidden !important;} // For legends and any element you want to hide on the page - doesn't work with table cells and not good if you need screenreaders to read the content */
+@mixin visuallyhidden {display: none;} // To remove elements off-screen and remove their effect on other elements in the document - doesn't work with table cells */
+@mixin hiddencell {text-indent: -1000em;} // To hide text in a table cell - still read by screen readers */
+@mixin invisible {visibility: hidden;} // To hide an element and its contents but still hold its structure on the page */
+@mixin invisiblepartial {visibility: hidden; text-indent: -1000em;} // To hide an element and its contents but still have its structure have a partial effect on its surrounding elements */

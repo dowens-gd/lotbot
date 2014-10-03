@@ -1,0 +1,426 @@
+<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="description" content="Substeps Eclipse plugin that makes the creation, execution, and refinement of Substeps test suites easier for everyone." />
+			
+			<title>Substeps</title>
+
+			
+			<link rel="stylesheet" href="css/screen.css" type="text/css" />
+			<link rel="stylesheet" href="css/shCore.css" type="text/css" />
+			<link rel="stylesheet" href="css/shThemeEclipse.css" type="text/css" />
+			<!--[if lte IE 8]>
+			<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+			<![endif]-->
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="js/interface.js"></script>
+			<script type="text/javascript" src="js/libs/modernizr.custom.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shCore.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushJScript.js"></script>
+			<script type="text/javascript" src="js/libs/syntaxhighlighter/shBrushXml.js"></script>
+			<script type="text/javascript">
+				SyntaxHighlighter.all()
+			</script>
+		</head>
+
+		<body ontouchstart>
+			<div class="accessibility" role="note">
+				<p>Accessibility links</p>
+				<a href="#main">Skip to main content</a>
+			</div><!-- / .accessibility -->
+			
+			<div id="page">
+				<header id="banner" role="banner">
+					<h1><a href="index.html" title="Link to home page"><img src="img/substeps-logo.png" alt="Substeps"></a></h1>
+
+					<nav class="menu" id="nav-level-1">
+						<h1 class="visuallyhidden" id="top-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="top-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li class="current"><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+						<!--	<li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li> -->
+						</ul>
+					</nav>
+				</header><!-- / #banner -->
+				
+				<main id="main" role="main">
+					<hgroup>
+						<h2>Eclipse plugin</h2>
+						<h3>Accelerate Substeps development</h3>
+					</hgroup>
+
+					<nav class="menu" id="nav-level-2">
+						<h1 id="second-level-nav-label">Page contents:</h1>
+					
+						<ul role="navigation" aria-labelledby="second-level-nav-label">
+						    <li><a href="#install" title="Jump to &lsquo;install&rsquo; section" role="button">Installation</a></li>  
+							<li><a href="#benefits" title="Jump to &lsquo;plugin benefits&rsquo; section" role="button">Benefits</a></li>
+							<li><a href="#usage" title="Jump to &lsquo;plugin usage&rsquo; section" role="button">Usage</a></li>
+							<li><a href="#configuration" title="Jump to &lsquo;plugin configuration&rsquo; section" role="button">Configuration</a></li>
+						</ul>
+					</nav>
+
+					<section>
+						<div class="content-block">
+							<p>The goal of this plugin is to make the creation, execution, and refinement of Substeps test suites easier for everyone.</p>
+							
+							<p>This page describes the plugins features and how they will help you in the day-to-day creation and maintenance of Substeps test suites.</p>
+
+							<p>It is not a guide to the Substeps framework itself, it is assumed you already have a working knowledge of Substeps. If you don&rsquo;t, we recommend you read the <a href="getting-started.html" title="">Getting started guide</a>.</p>
+
+							<p>The main features of the Substeps Eclipse plugin are:</p>
+
+							<ul>
+								<li><strong>content assist</strong> &ndash; helping you use the most appropriate step definition and avoid duplication</li>
+								<li><strong>syntax highlighting</strong> &ndash; a splash of colour always helps to aid comprehension</li>
+								<li><strong>error highlighting</strong> &ndash; discover problems during editing</li>
+								<li><strong>execute tests</strong> &ndash; run Substeps tests directly from within Eclipse</li>
+								<li><strong>navigation</strong> &ndash; quickly navigate between feature files and the corresponding substep files</li>
+								<li><strong>code formatting</strong> &ndash; ensure consistency of formatting across teams</li>
+							</ul>
+						</div>
+
+						<section>
+							<header id="install">
+								<h4>Installation</h4>
+							</header>
+
+							<div class="content-block">
+								<h5>Prerequisites</h5>
+
+								<p>An Eclipse 4.2 (Juno) or greater installation and a Substeps project setup.</p>
+
+								<h5>Installing the plugin</h5>
+
+								<p>With Eclipse:</p>
+
+								<ul>
+									<li><strong>Help &#8594; Install new software</strong></li>
+									<li>Click &ldquo;<strong>Add&hellip;</strong>&rdquo; to add Technophobia&rsquo;s update site:
+										<ul>
+											<li><strong>Name:</strong> Substeps update site (or an alternative of your choice)</li>
+											<li><strong>Location:</strong> http://code.technophobia.com/substeps/eclipse/stable/</li>
+										</ul>
+									</li>
+									<li>Once added, select &ldquo;<strong>Substeps update site</strong>&rdquo; in the &ldquo;<strong>work with</strong>&rdquo; options list, expand Substeps in the pane below until you see an entry with a version next to it (see below)</li>  
+								</ul>
+
+								<figure>
+									<img src="img/eclipse_install_plugin.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin installation in Eclipse &ldqou;<strong>Install new software</strong>&rdquo; dialog window.</p>
+									</figcaption>
+								</figure>
+
+								<p>Select the latest version, &ldquo;<strong>Next</strong>&rdquo;, accept the license agreement <abbr>etc</abbr>. and &ldquo;<strong>Finish</strong>&rdquo;.</p>
+
+								<p>Restarting Eclipse afterwards is not essential, although you may have to re-open any feature or substeps files you have already open.</p>
+							</div>
+						</section>
+
+						<section>
+							<header class="subtitle" id="benefits">
+								<h3>Benefits</h3>
+							</header>
+
+							<div class="content-block">
+								<p>It is actually possible to work on Substeps test suites without a specific editor. Simply write your features and substeps in a text editor and run them via the command line using one of the supported build tools (Maven, ANT or JUnit).</p>
+								<p>However, we feel that the plugin offers a number of significant benefits:</p>
+
+								<h4>Improved efficiency</h4>
+								<p>Features such as error highlighting mean that problems are discovered immediately as they are entered, instead of during execution.</p>
+								<p>Also, by using the content assist feature, less time can be spent searching through all of the substeps files looking for a particular definition.</p>
+
+								<h4>More errors found during creation than execution</h4>
+								<p>Without using the plugin, there is no way of knowing whether a feature set is valid or not without running it. This is quite a significant feedback loop. By highlighting problems in the editor as they&rsquo;re typed, the feedback loop is reduced and should also reduce the number of times builds fail due to <abbr title="typing errors">typos</abbr>.</p>
+
+								<h4>Less chance of duplication</h4>
+								<p>With multiple people writing <abbr>BDD</abbr> tests on the same project, there&rsquo;s a good chance they&rsquo;ll have the same need for common substeps definitions and may each write their own versions, not realising others had done the same. This duplication will typically cause problems further down the line when tests need to be refactored or changed.</p>
+								<p>By using the plugin and content assist, team members are more easily able to spot existing step definitions that meet their needs before writing their own</p>
+
+								<h4>Consistent formatting</h4>
+								<p>The plugin provides a standard formatting capability of feature and substeps files, resulting in a consistent look across the various substeps files regardless of which team member wrote them.</p>
+
+								<h4>Single tool</h4>
+								<p>All substeps related activity can be performed within the Eclipse <abbr title="Integrated Development Environment">IDE</abbr>, without the need to switch between applications. From within Eclipse it is possible to author features and define Substeps, in addition to being able to run these tests, all without leaving the <abbr>IDE</abbr>.</p>
+							</div>
+						</section>
+
+						<section>
+							<header class="subtitle" id="usage">
+								<h3>Substeps Eclipse plugin usage</h3>
+							</header>
+
+							<div class="content-block">
+								<p>This guide assumes a basic knowledge of Eclipse (nothing too exhaustive, but a knowledge of importing and navigating projects, how to open views etc).</p>
+							</div>
+
+							<div class="content-block">
+								<h4>Editors</h4>
+								<p>The plugin provides an editor for features:</p>
+								<figure>
+									<img src="img/feature_editor.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin feature editor.</p>
+									</figcaption>
+								</figure>
+								<p>And Substep definitions:</p>
+								<figure>
+									<img src="img/substep_editor.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin definitions.</p>
+									</figcaption>
+								</figure>
+								<h5>Both editors offer:</h5>
+								<ul>
+									<li>Substeps syntax colouring</li>
+									<li>Content assist, triggered by <kbd>Ctrl</kbd> + <kbd>Space</kbd> with suggestions filtered by the text already typed on the line</li>
+								</ul>
+							</div>
+
+							<div class="content-block">
+								<h4>Navigation</h4>
+								<p>Features and Substeps files can be located in the Project and Package explorers as with other file resources.</p>
+								<p>The outline view has been extended and populated with the structure of the feature or Substeps file, depending on which editor is currently active.</p>
+								<p>The outline view allows you to quickly navigate the overall structure of the Feature or Substeps file, and drill down to specific steps without having to scroll down/up.</p>
+								<figure>
+									<img src="img/feature_outline_package.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin displaying feature outline package.</p>
+									</figcaption>
+								</figure>
+								<p>The outline view can be enabled via the Eclipse menu:</p>
+								<p><strong>Window &#8594; Show view &#8594; Outline</strong></p>
+								<h5>Jump to Step definition</h5>
+								<p>When editing a feature file, it is possible to jump to the definition of a particular step using <kbd>F3</kbd>.</p>
+								<p>Place the cursor anywhere on the line within the feature file and press <kbd>F3</kbd>.</p>
+								<p class="strong note"><abbr title="Latin: Nota bene; take special note (used to precede a written note).">NB</abbr>. Currently, this functionality only works for steps defined in Substeps files. If the step is defined in Java, no attempt will be made to open the corresponding Java file.</p>
+							</div>
+
+							<div class="content-block">
+								<h4>Substeps Test Execution</h4>
+								<p>An important facet of the plugin is the ability to run and debug Substeps features easily. The current implementation has borrowed heavily from the Eclipse JUnit plugin, so users familiar with this functionality will also be familiar with the features of the Substeps plugin.</p>
+								<p>With a feature file selected in the Project or Package explorer view, select &ldquo;<strong>Run As</strong>&rdquo; &#8594; &ldquo;<strong>Substeps Feature Test</strong>&rdquo; from the context menu (right-click, by default).</p>
+								<figure>
+									<img src="img/substeps_run_as.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin right-click context-menu for accessing Substeps Feature Test.</p>
+									</figcaption>
+								</figure>
+								<p>Running a feature in this way is also available from the context-menu whilst editing a feature file.</p>
+								<p>Choosing to run a feature in this way will add an entry to the &ldquo;<strong>Run Configurations</strong>&rdquo;.</p>
+								<figure>
+									<img src="img/run_configurations.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin Run Configurations Management.</p>
+									</figcaption>
+								</figure>
+								<p>By default, no parameters are passed to the test runner. As a result, the execution of the test will use the default values.</p>
+								<p>To specify an alternate set of properties, open the Run Configurations, select the desired feature under Substeps, Arguments tab and add the appropriate <code>-D</code> parameters to the &ldquo;VM Arguments&rdquo; field (eg. <code>-Denvironment=qa</code> or <code>-Dwebdriver.chrome.driver=/utils/chromedriver/chromedriver</code>).</p>
+								<figure>
+									<img src="img/run_configs_args.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin &ldquo;<strong><abbr>VM</abbr> arguments</strong>&rdquo; field entry within Run Configurations Management.</p>
+									</figcaption>
+								</figure>
+								<h5>Substeps Test Execution &ndash; Results</h5>
+								<p>A Substeps view provides a hierarchical indicator of test progress and success or otherwise, in addition to any failure messages and stack traces that maybe encountered.</p>
+								<figure>
+									<img src="img/execution_results.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin execution results displayed in the &ldquo;<strong>Console view</strong>&rdquo;.</p>
+									</figcaption>
+								</figure>
+								<p class="note"><abbr>NB</abbr>. There are a number of features that can be found in the Junit plugin that Substeps currently does not:</p>
+								<ul>
+									<li>It is not currently possible to jump from the hierarchy of executed steps to the corresponding location in the source file</li>
+									<li>Re-running the tests via the hierarchical view</li>
+								</ul>
+								<p>We are aiming to add these features in due course.</p>
+							</div>
+
+							<div class="content-block">
+								<h4>Problem Highlighting</h4>
+								<p>The Problems view is designed to highlight syntax issues directly to the author, without having to execute tests first.</p>
+								<p>Problematic lines are underlined and a marker placed in the overview ruler on the right, further details regarding the problem can be found in the &ldquo;<strong>Problems View</strong>&rdquo;.</p>
+								<figure>
+									<img src="img/substeps_errors.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin problem highlighting.</p>
+									</figcaption>
+								</figure>
+							</div>
+
+							<div class="note">
+								<h5>Warning!</h5>
+								<p>By default, the plugin will highlight problems such as missing step definitions, duplications <abbr>etc</abbr>. in the editor and list these issues in the &ldquo;Problems&rdquo; view.</p>
+
+								<p>The detection of problems has a side effect of halting further processing that eclipse might do, such as compiling classes for example, which in turn may lead to further &ldquo;problems&rdquo; where step implementations cannot be found.</p>
+
+								<p>If you encounter such issues, simply disable the highlighting of problems in the Substeps preferences for the project.</p>
+							</div>
+						</section>
+
+						<section>
+							<header class="subtitle" id="configuration">
+								<h3>Configuration</h3>
+							</header>
+
+							<div class="content-block">
+								<p>Once the plugin has been installed it can be configured on a per project basis.</p>
+								<p>From the Package or Project Explorer view</p>
+								<ul>
+									<li>Select your Substeps project</li>
+									<li>context (right, by default) click</li>
+									<li>Properties</li>
+									<li>Substeps:</li>
+								</ul>
+								<figure>
+									<img src="img/substep-plugin-prefs.png" width="100%" alt="" />
+									
+									<figcaption>
+										<p>Screenshot of Substeps Eclipse plugin preferences.</p>
+									</figcaption>
+								</figure>
+							</div>
+
+							<div class="content-block">
+								<h4>Show problems</h4>
+								<p>By default, the plugin will highlight problems such as missing step definitions, duplications etc in the editor and list these issues in the 'Problems' view.</p>
+								<p>The detection of problems has a side effect of halting further processing that eclipse might do, such as compiling classes for example, which in turn may lead to further 'problems' where step implementations cannot be found.</p>
+								<p>If you encounter such issues, simply disable the highlighting of problems</p>
+							</div>
+
+							<div class="content-block">
+								<h4>Folders</h4>
+								<p>The plugin will attempt to locate feature and substeps directories within the project.</p>
+								<p>If you are using the Maven pattern of locating these directories under src/test/resources or src/main/resources, you will need to specify the folders where the features and substeps can be found. This is due to the plugin finding the files in both target and source folders.</p>
+							</div>
+
+							<p>As the plugin is developed further, more options will be added to this set of preferences.</p>
+						</section>
+					</section>
+				</main><!-- / #main -->
+
+				<aside id="complementary" role="complementary">
+                    <section id="sample">
+                        <header>
+                            <h2>Sample project</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've put together a self contained sample project containing a static website and some illustrative Substeps tests.</p>
+                            <p>Download the project and have a play, see how easy it is to build tests using the Substeps libraries and extend with your own functionality</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="sample_project/substeps-webdriver-sample-project-1.1.0.zip" title="Download the sample project here">Download the sample project here</a>
+                        </div>
+                    </section>
+
+					<!--<section id="case-study">
+						<header>
+							<h2>Case studies</h2>
+						</header>
+
+						<div class="content-body">
+							<p>Aenean lacinia bibendum nulla sed consectetur. Duis mollis, est non commodo luctus.
+						</div>
+
+						<div class="signpost">
+							<a href="#nowhere" title="Link to case study">Sit amet, consectetur</a>
+						</div>
+					</section>-->
+
+                    <section id="assistance">
+                        <header>
+                            <h2>Help and support</h2>
+                        </header>
+
+                        <div class="content-body">
+                            <p>We've setup a Google group where you can raise issues, receive support and answers to any Substep related questions you may have.</p>
+                            <p>We also announce new releases here too.</p>
+                        </div>
+
+                        <div class="signpost">
+                            <a href="http://groups.google.com/group/substeps?hl=en-GB" title="Link to Substeps Google group discussion forum">Substeps Google group</a>
+                        </div>
+                    </section>
+				</aside><!-- / #complementary -->
+				
+				<footer id="footer" role="contentinfo">
+					<nav class="menu" id="nav-level-sitemap">
+						<h1 class="visuallyhidden" id="sitemap-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="sitemap-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-implementations">
+						<h1 class="visuallyhidden" id="implementations-level-nav-label">Implementing Substeps information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="implementations-level-nav-label">
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="step-implementations.html#webdriver" title="Navigate to &lsquo;Webdriver&rsquo; page" role="button">Webdriver</a></li>
+							<li><a href="step-implementations.html#email-substeps" title="Navigate to &lsquo;Email&rsquo; page" role="button">Email</a></li>
+						<!-- 	<li><a href="#nowhere" title="Navigate to &lsquo;Database&rsquo; page" role="button">Database</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-eclipse">
+						<h1 class="visuallyhidden" id="eclipse-level-nav-label">Eclipse plugin information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="eclipse-level-nav-label">
+							<li><a href="eclipse-plugin.html#install" title="Navigate to &lsquo;Install&rsquo; page" role="button">Install</a></li>
+							<li><a href="eclipse-plugin.html#benefits" title="Navigate to &lsquo;Benefits&rsquo; page" role="button">Benefits</a></li>
+							<li><a href="eclipse-plugin.html#usage" title="Navigate to &lsquo;Usage&rsquo; page" role="button">Usage</a></li>
+							<li><a href="eclipse-plugin.html#configuration" title="Navigate to &lsquo;Configuration&rsquo; page" role="button">Configuration</a></li>
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-support">
+						<h1 class="visuallyhidden" id="support-level-nav-label">Support level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="support-level-nav-label">
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="#nowhere" title="Navigate to &lsquo;Downloads&rsquo; page" role="button">Downloads</a></li>  -->
+							<li><a href="support.html#getting-involved" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>
+						</ul>
+					</nav>
+
+					<div class="credits">
+						<p>
+							Created by
+							<a href="http://technophobia.com" title="Visit Technophobia site" rel="external">
+								<img src="img/tp-logo.png" alt="Technophobia, part of Capita plc." />
+								<em>Visit Technophobia site</em>
+							</a>
+						</p>
+					</div>
+				</footer>
+			</div><!-- / #page -->
+		</body>
+	</html>

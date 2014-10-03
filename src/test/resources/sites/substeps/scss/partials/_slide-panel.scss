@@ -1,0 +1,48 @@
+.subtitle {
+	margin-bottom: 1em;
+	border-bottom: 3px solid #ff9726;
+	padding: .5em .5em .25em;
+	background: #f1f0eb;
+	cursor: pointer;
+
+	& > :first-child {
+		margin: 0;
+
+		&:after {
+			margin-left: 1em;
+			text-decoration: underline;
+			font: normal .5em/1.0 Arial, Verdana, sans-serif;
+			color: #2e90a4;
+			content: "open content";
+		}
+	}
+
+	&:hover,
+	&:focus {
+		border-color: #444;
+		
+		& > :first-child:after {
+			text-decoration: none;
+		}
+	}
+
+	&.open {
+		& > :first-child {
+			&:after {
+				content: "close content";
+			}
+		}
+	}
+
+	& h3 + h4 {
+		margin: 0;
+	}
+}
+
+hgroup.subtitle {
+	padding: .5em;
+
+	& > :first-child {
+		margin: 0 auto;
+	}
+}

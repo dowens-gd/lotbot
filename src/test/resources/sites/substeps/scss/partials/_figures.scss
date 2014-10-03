@@ -1,0 +1,26 @@
+main {counter-reset: figures 0;}
+
+figure {
+	margin-bottom: 1em;
+	border: 1px solid #ccc;
+	padding: 1em 1em 0 1em;
+	background: #eee;
+}
+
+[class="content-block"] figcaption,
+figcaption {
+	margin: 1em -1em 0;
+	border-top: 1px solid #ccc;
+	padding: 1em;
+	background: white;
+
+	& p {
+		margin-bottom: 0;
+		font-size: .75em;
+
+		&:before {
+			counter-increment: figures 1;
+			content: 'Figure: ' counter(figures) '. ';
+		}
+	}
+}

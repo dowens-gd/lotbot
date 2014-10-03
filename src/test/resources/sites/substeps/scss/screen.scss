@@ -1,0 +1,455 @@
+/* =====================================================================
+/* Kevin Rapley | Substeps | Technophobia
+/* Main screen styles
+/* ================================================================== */
+
+// ---------------------------------------------------------------------
+// §:Imports
+// ---------------------------------------------------------------------
+ 
+// Compass
+@import "compass";
+
+// Compass plugins
+@import "susy";
+
+// Mixins
+@import "mixins/clearfix";
+@import "mixins/hiding-elements";
+@import "mixins/image-replacement";
+@import "mixins/establish-baseline";
+@import "mixins/font-stacks";
+@import "mixins/rem";
+@import "mixins/retina";
+
+// Partials
+@import "partials/base";
+@import "partials/figures";
+@import "partials/grid";
+@import "partials/keyboard";
+@import "partials/notices";
+@import "partials/slide-panel";
+@import "partials/tables";
+@import "partials/typography";
+
+// Set IE experimental SVG support for gradients
+$experimental-support-for-svg: true;
+
+/* -------------------------------------------------------------------------*/
+/* Layout */
+
+.container {
+  @include container;
+  @include susy-grid-background;
+}
+
+#banner,
+#banner nav.menu,
+main,
+#complementary,
+#footer {
+	@include clearfix;
+}
+
+#page {
+	& section,
+	& article {
+		margin-bottom: 2em;
+	}
+}
+
+#banner {
+	& h1 {
+		margin-bottom: 0;
+
+		@include at-breakpoint(12) {
+			margin-bottom: 0.83333em;
+		}
+	}
+
+	& h1 a {
+		display: block;
+		margin-top: 32px;
+	}
+
+	& nav.menu {
+		& li {
+			float: none;
+
+			@include at-breakpoint(8) {
+				float: left;
+			}
+
+			&:last-of-type a {
+				border-bottom: none;
+			}
+		}
+
+		& a:link,
+		& a:visited {
+			display: block;
+			border-bottom: 1px dotted #999;
+			padding: .5em;
+			text-decoration: none;
+			color: #63605d;
+
+			@include at-breakpoint(8) {
+				margin-right: 9px;
+				border-bottom: none;
+				padding: 51px 11px 11px;
+				font-size: .75em;
+			}
+
+			@include at-breakpoint(12) {
+				font-size: 1em;
+			}
+		}
+
+		& a:hover,
+		& a:focus,
+		& a:active,
+		& li.current a {
+			color: #212121;
+			background: #f1f0eb;
+		}
+	}
+}
+
+div.introduction {
+	position: relative;
+	@include clear;
+	padding: 88px 0 70px;
+	text-align: center;
+	background: url(../graphics/spheres.png) repeat-x 26% 0;
+
+	&:before {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: -1;
+		@include background-image( radial-gradient(40% 70%, #ffbd63 400px, #ff9726 800px) );
+		content: '';
+	}
+
+	& h2,
+	& p {
+		display: block;
+		margin: 0 auto 2em;
+		max-width: 350px;
+		font-weight: normal;
+	}
+
+	& h2 {
+		max-width: 700px;
+		margin-bottom: .75em;
+
+		@media (max-width: 640px) {
+		 	padding-bottom: 1.25em;
+		 	font-size: 1.75em;
+		}
+
+		@media (min-width: 640px) {
+			padding-bottom: 1em;
+		 	font-size: 2.25em;
+		}
+
+		@media (min-width: 960px) {
+			padding-bottom: 0;
+		 	font-size: 2.5em;
+		}
+	}
+
+	& p {
+		@media (max-width: 640px) {
+		 	padding-bottom: 1.25em;
+		}
+
+		@media (min-width: 640px) {
+			padding-bottom: 1em;
+		}
+
+		@media (min-width: 960px) {
+			padding-bottom: 0;
+		}
+	}
+
+	& button {
+		padding: 1.2em 1.5em;
+		border: none;
+		@include border-radius(4px);
+		@include box-shadow(0 -2px 1px #a5abb0, 0 4px 1px #222, 0 6px 10px #7f5a2b);
+		font-size: 1em;
+		color: white;
+		@include background-image( linear-gradient(#4b5661 20%, #2e3b48) );
+		cursor: pointer;
+
+		&:active {
+			position: relative;
+			top: 4px;
+			@include box-shadow(0 -2px 2px #a5abb0, 0 2px 5px #7f5a2b);
+		}
+
+		& abbr {
+			padding: 1em 3em 1em 0;
+			background: url(../img/download.png) no-repeat 100% 50%;
+			cursor: pointer;
+		}
+
+		&:hover abbr,
+		&:focus abbr {
+			background-image: url(../img/download-focus.png);
+		}
+	}
+}
+
+%pagetitle {
+	border-bottom: 3px solid #ff9726;
+	padding-bottom: .25em;
+
+	&:after {
+		margin-left: .25em;
+		color: #dbd8cd;
+		content: "/";
+	}
+}
+
+main {
+	padding: 42px 0;
+
+	& > header h2 {
+		@extend %pagetitle;
+	}
+
+	& > hgroup :last-child {
+		@extend %pagetitle;
+	}
+
+	& nav {
+		@include clearfix;
+
+		& h1 {
+			font-size: 14px;
+			font-size: 1.15rem;
+		}
+		
+		& li:before {
+			display: block;
+			float: left;
+			margin: 0 .5em;
+			color: #dbd8cd;
+			content: "/";
+		}
+
+		& li:first-child:before {content: none;}
+
+		& a {
+			display: block;
+			float: left;
+			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+div.content-body nav.menu {
+	margin-top: 1em;
+
+	& li {
+		border-bottom: 1px dotted #666;
+		list-style: none;
+	}
+
+	& a:link,
+	& a:visited {
+		display: block;
+		padding: .5em 0;
+		text-decoration: none;
+	}
+}
+
+#definition {
+	& div.content-body p:first-child {
+		font-size: 1.25em;
+		line-height: 1.35;
+	}
+
+	& img {width: 100%;}
+
+	@include at-breakpoint(8) {
+		& img,
+		& p:nth-of-type(2),
+		& ul {
+			float: left;
+			width: 60%;
+		}
+
+		& img {
+			width: 40%;
+		}
+	}
+}
+
+ol.posts li {
+	border-top: 1px dashed #dbd8cd;
+	padding: 1em 0 0 3em;
+	list-style: none;
+	background: url(../graphics/posts.png) no-repeat 0 1em;
+
+	&:first-child {
+		border-top: none;
+		padding-top: 0;
+		background-position: 0 0;
+	}
+
+	& a {
+		font-size: 110%;
+	}
+
+	@media screen and (max-width: 64em) {
+		& p {display: none;}
+	}
+}
+
+#complementary {
+	padding: 40px 0 50px;
+	background: #f1f0eb;
+
+	& section {
+		&:first-child {
+			@include at-breakpoint(8) {
+				margin-bottom: 2em;
+			}
+		}
+
+		& h2 {
+			border-bottom: 3px solid;
+			padding-bottom: .25em;
+
+			&:after {
+				margin-left: .25em;
+				color: #dbd8cd;
+				content: "/";
+			}
+		}
+
+		&:first-child h2 {
+			border-color: #f67096;
+		}
+
+		&:nth-child(2) h2 {
+			border-color: #98d2d7;
+		}
+
+		&:nth-child(3) h2 {
+			border-color: #865890;
+		}
+	}
+}
+
+#footer {
+	position: relative;
+	padding: 30px 0;
+	min-height: 13em;
+	color: white;
+	background: #52514e;
+
+	& div.credits {
+		padding: 1em;
+		@include box-sizing(border-box);
+		text-align: center;
+		color: #83817b;
+		background: #2c2b2b;
+
+		@include at-breakpoint(12) {
+			position: absolute;
+			top: 2em;
+			right: 0;
+			margin-right: 0;
+			@include box-sizing(border-box);
+		}
+
+		@include at-breakpoint(16) {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			margin-right: 6.38298%;
+			padding-right: 1em;
+			@include box-sizing(border-box);
+		}
+
+		@include at-breakpoint(16) {
+		  margin-right: 5.08475%;
+		}
+
+		& p,
+		& a,
+		& img,
+		& em {
+			display: block;
+			text-transform: lowercase;
+			font-variant: small-caps;
+		}
+
+		& a {
+			border-bottom: none;
+		}
+
+		& a:link em,
+		& a:visited em {
+			display: inline-block;
+			border-bottom: 1px dotted #98d3d7;
+			text-decoration: none;
+			text-transform: none;
+			font-size: .75rem;
+			font-variant: normal;
+			color: #98d2d7;
+		}
+
+		& a:hover em,
+		& a:focus em,
+		& a:active em {
+			border-bottom: none;
+		}
+
+		& img {
+			margin: 1em auto;
+		}
+	}
+
+	& ul {
+		margin-bottom: 1em;
+	}
+
+	& a:link,
+	& a:visited {
+		display: block;
+		border-bottom: 1px dotted #999;
+		padding: .5em;
+		text-decoration: none;
+		color: #d9d6cb;
+
+		@include at-breakpoint(8) {
+			border-bottom: none;
+			padding: 0;
+		}
+	}
+
+	& a:hover,
+	& a:focus,
+	& a:active {
+		color: white;
+		text-decoration: underline;
+	}
+
+	& li:first-child a {
+		font-family: SourceSansProBold, Arial, Verdana, sans-serif;
+		font-weight: bold;
+	}
+}

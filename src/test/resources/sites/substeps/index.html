@@ -1,0 +1,236 @@
+<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+			<meta name="apple-mobile-web-app-capable" content="yes" />
+			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+			<meta name="description" content="Substeps: an open source behaviour driven development framework which allows tests to be implemented and executed by quality assurance team members with limited technical experience and assistance from developers" />
+			
+			<title>Substeps</title>
+			
+			<link rel="stylesheet" href="css/screen.css" type="text/css" />
+			<!--[if lte IE 8]>
+			<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+			<![endif]-->
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="js/libs/modernizr.custom.js"></script>
+			<script type="text/javascript" src="js/interface.js"></script>
+		</head>
+
+		<body ontouchstart>
+			<div class="accessibility" role="note">
+				<p>Accessibility links</p>
+				<a href="#main">Skip to main content</a>
+			</div><!-- / .accessibility -->
+			
+			<div id="page">
+				<header id="banner" role="banner">
+					<h1><a href="index.html" title="Link to home page"><img src="img/substeps-logo.png" alt="Substeps" /></a></h1>
+
+					<nav class="menu" id="nav-level-1">
+						<h1 class="visuallyhidden" id="top-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="top-level-nav-label">
+							<li class="current"><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!--  <li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li> -->
+						</ul>
+					</nav>
+
+					<div class="introduction">
+						<h2><strong>Substeps</strong> is an <strong>open source <abbr title="Behaviour Driven Development">BDD</abbr></strong> framework created by <strong>Technophobia</strong></h2>
+
+						<p>Substeps tests can be implemented and executed by team members with limited technical experience.</p>
+    
+                        <form method="get" action="sample_project/substeps-webdriver-sample-project-1.1.0.zip">
+    						<button type="submit" id="download-substeps">Download the sample project <abbr title="Version 2.0.2">V2.0.2</abbr></button>
+						</form>
+					</div>
+				</header><!-- / #banner -->
+				
+				<main id="main" role="main">
+					<section id="definition">
+						<header>
+							<h2>What is Substeps?</h2>
+						</header>
+
+						<div class="content-body">
+							<p>
+								<strong>Substeps</strong> is an <strong>open source <a href="http://en.wikipedia.org/wiki/Behavior-driven_development" title="Link to Wikipedia entry on behaviour-driven development" rel="external"><abbr>BDD</abbr></a></strong> framework created by <a href="http://technophobia.com" title="Visit Technophobia.com" rel="external">Technophobia</a>. <strong>Substeps</strong> tests can be implemented and executed by team members with limited technical experience.
+							</p>
+							
+							<img src="img/what-is-substeps.jpg" width="50%" alt="" />
+							
+							<p>We developed the Substeps framework specifically to:
+
+							<ul>
+								<li>implement <abbr>BDD</abbr> using natural language as close to Cucumber&rsquo;s Gherkin syntax as possible</li>
+								<li>reduce the amount of developer effort involved in implementing step implementations</li>
+								<li>provide a way for the <abbr title="Quality Assurance">QA</abbr> team to easily execute tests autonomously</li>
+								<li>provide as much help as possible to the <abbr>QA</abbr> team to be able to write the tests</li>
+							</ul>
+						</div>
+					</section>
+
+					<article id="articles">
+						<header>
+							<h2>Latest articles</h2>
+						</header>
+
+						<div class="content-body">
+							<p>
+								There are a number of articles that provide some of the background as to why we’ve created our own <abbr>BDD</abbr> framework, read about our experiences with <a href="http://technophobia.com/blog/read/experiences-with-bdd-and-cucumber-part-ii-substeps-439" title="Experiencse with BDD and Cucumber &mdash; Part II" rel="external"><abbr>BDD</abbr> and Cucumber</a> and <a href="http://technophobia.com/blog/read/experiences-with-bdd-and-cucumber-part-ii-substeps-439" title="Experiencse with BDD and Cucumber &mdash; Part II" rel="external">the use of Substeps as an alternative</a>.
+							</p>
+
+							<ol class="posts">
+								<li>
+									<a href="http://technophobia.com/blog/read/experiences-with-bdd-and-cucumber-part-i-438" title="" rel="external">
+										<em>Experiences with <abbr>BDD</abbr> and Cucumber &mdash; Part <dfn title="1">I</dfn></em>
+									</a>
+										
+									<p>Behaviour driven development (or <abbr>BDD</abbr>) is a technique that first appeared around 2006 and has gained traction and support ever since and with good reason. <nobr>[<a href="http://technophobia.com/blog/read/experiences-with-bdd-and-cucumber-part-i-438" title="Experiencse with BDD and Cucumber &mdash; Part I" rel="external">read more&hellip;</a>]</nobr></p>
+								</li>
+
+								<li>
+									<a href="http://technophobia.com/blog/read/experiences-with-bdd-and-cucumber-part-ii-substeps-439" title="Experiencse with BDD and Cucumber &mdash; Part II" rel="external">
+										<em>Experiences with <abbr>BDD</abbr> and Cucumber &mdash; Part <dfn title="2">II</dfn> &mdash; Substeps </em>
+									</a>
+
+									<p>The main problem we encountered with using Cucumber and Java to implement <abbr>BDD</abbr> was the impact upon the development team of writing the significant amount of &lsquo;test&rsquo; code that is required, in addition to implementing the actual solution. <nobr>[<a href="http://technophobia.com/blog/read/experiences-with-bdd-and-cucumber-part-ii-substeps-439" title="Experiencse with BDD and Cucumber &mdash; Part II" rel="external">read more&hellip;</a>]</nobr></p>
+								</li>
+							</ol>
+						</div>
+					</article>
+
+					<section id="implementation">
+						<header>
+							<h2>Getting started</h2>
+						</header>
+
+						<div class="content-body">
+							<p>Follow our straight forward and simple guide to getting started with Substeps and building your own suite of acceptance tests.</p>
+
+							<nav class="menu" id="nav-implementation">
+								<h1 class="visuallyhidden" id="section-level-nav-label">Section level &lsquo;Getting started&rsquo; navigation</h1>
+							
+								<ul role="navigation" aria-labelledby="section-level-nav-label">
+									<li><a href="usage.html" title="Navigate to &lsquo;Usage&rsquo; page" role="button">Quick overview</a></li>
+									<li><a href="getting-started.html" title="Navigate to &lsquo;Getting started&rsquo; page" role="button">Getting started</a></li>
+									<li><a href="extending.html" title="Navigate to &lsquo;Extending and Customising&rsquo; page" role="button">Extending and Customising</a></li>
+									<li><a href="test-execution-report.html" title="Navigate to &lsquo;Test Execution Report&rsquo; page" role="button">Test Execution Report</a></li>
+									<li><a href="migrating.html" title="Navigate to &lsquo;Migration to 1.1.0&rsquo; page" role="button">Migration to 1.1.0</a></li>
+								</ul>
+							</nav>
+						</div>
+					</section>
+				</main><!-- / #main -->
+
+				<aside id="complementary" role="complementary">
+					<section id="sample">
+						<header>
+							<h2>Sample project</h2>
+						</header>
+
+						<div class="content-body">
+							<p>We've put together a self contained sample project containing a static website and some illustrative Substeps tests.</p>
+							<p>Download the project and have a play, see how easy it is to build tests using the Substeps libraries and extend with your own functionality</p>
+						</div>
+
+						<div class="signpost">
+							<a href="sample_project/substeps-webdriver-sample-project-1.1.0.zip" title="Download the sample project here">Download the sample project here</a>
+						</div>
+					</section>
+
+<!--  					<section id="case-study">
+						<header>
+							<h2>Case studies</h2>
+						</header>
+
+						<div class="content-body">
+							<p>hopefully we'll get some case studies in here at some point
+						</div>
+
+						<div class="signpost">
+							<a href="#nowhere" title="Link to case study">Sit amet, consectetur</a>
+						</div>
+					</section> -->
+
+					<section id="assistance">
+						<header>
+							<h2>Help and support</h2>
+						</header>
+
+						<div class="content-body">
+							<p>We've setup a Google group where you can raise issues, receive support and answers to any Substep related questions you may have.</p>
+							<p>We also announce new releases here too.</p>
+						</div>
+
+						<div class="signpost">
+							<a href="http://groups.google.com/group/substeps?hl=en-GB" title="Link to Substeps Google group discussion forum">Substeps Google group</a>
+						</div>
+					</section>
+				</aside><!-- / #complementary -->
+				
+				<footer id="footer" role="contentinfo">
+					<nav class="menu" id="nav-level-sitemap">
+						<h1 class="visuallyhidden" id="sitemap-level-nav-label">Top level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="sitemap-level-nav-label">
+							<li><a href="index.html" title="Navigate to &lsquo;Home&rsquo; page" role="button" rel="home">Home</a></li>
+							<li><a href="getting-started.html" title="Navigate to &lsquo;Get started&rsquo; page" role="button">Get started</a></li>
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="eclipse-plugin.html" title="Navigate to &lsquo;Eclipse plugin&rsquo; page" role="button">Eclipse plugin</a></li>
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="contribute.html" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-implementations">
+						<h1 class="visuallyhidden" id="implementations-level-nav-label">Implementing Substeps information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="implementations-level-nav-label">
+							<li><a href="step-implementations.html" title="Navigate to &lsquo;Step implementations&rsquo; page" role="button">Step implementations</a></li>
+							<li><a href="step-implementations.html#webdriver" title="Navigate to &lsquo;Webdriver&rsquo; page" role="button">Webdriver</a></li>
+							<li><a href="step-implementations.html#email-substeps" title="Navigate to &lsquo;Email&rsquo; page" role="button">Email</a></li>
+						<!-- 	<li><a href="#nowhere" title="Navigate to &lsquo;Database&rsquo; page" role="button">Database</a></li>  -->
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-eclipse">
+						<h1 class="visuallyhidden" id="eclipse-level-nav-label">Eclipse plugin information navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="eclipse-level-nav-label">
+							<li><a href="eclipse-plugin.html#install" title="Navigate to &lsquo;Install&rsquo; page" role="button">Install</a></li>
+							<li><a href="eclipse-plugin.html#benefits" title="Navigate to &lsquo;Benefits&rsquo; page" role="button">Benefits</a></li>
+							<li><a href="eclipse-plugin.html#usage" title="Navigate to &lsquo;Usage&rsquo; page" role="button">Usage</a></li>
+							<li><a href="eclipse-plugin.html#configuration" title="Navigate to &lsquo;Configuration&rsquo; page" role="button">Configuration</a></li>
+						</ul>
+					</nav>
+					
+					<nav class="menu" id="nav-level-support">
+						<h1 class="visuallyhidden" id="support-level-nav-label">Support level navigation</h1>
+					
+						<ul role="navigation" aria-labelledby="support-level-nav-label">
+							<li><a href="support.html" title="Navigate to &lsquo;Support&rsquo; page" role="button">Support</a></li>
+							<!-- <li><a href="#nowhere" title="Navigate to &lsquo;Downloads&rsquo; page" role="button">Downloads</a></li>  -->
+							<li><a href="support.html#getting-involved" title="Navigate to &lsquo;Contribute&rsquo; page" role="button">Contribute</a></li>
+						</ul>
+					</nav>
+
+					<div class="credits">
+						<p>
+							Created by
+							<a href="http://technophobia.com" title="Visit Technophobia site" rel="external">
+								<img src="img/tp-logo.png" alt="Technophobia, part of Capita plc." />
+								<em>Visit Technophobia site</em>
+							</a>
+						</p>
+					</div>
+				</footer>
+			</div><!-- / #page -->
+		</body>
+	</html>

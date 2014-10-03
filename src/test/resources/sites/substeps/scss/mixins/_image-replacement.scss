@@ -1,0 +1,14 @@
+// =Image replacement method
+// ------------------------------------------------------------------ */
+
+@mixin ir {display: block; overflow: hidden; text-align: left; text-indent: -999em; background-repeat: no-repeat; direction: ltr;}
+@mixin icon($pos-x) {
+	width: 32px;
+	height: 32px;
+	background: url(../img/icons.png) $pos-x 0;
+	@include ir;
+	
+	&:hover {
+		background-position: $pos-x -32px;
+	}
+}

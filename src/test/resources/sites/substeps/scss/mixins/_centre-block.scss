@@ -1,0 +1,7 @@
+// =Centre-align a block level element
+// ------------------------------------------------------------------ */
+@mixin centre-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
