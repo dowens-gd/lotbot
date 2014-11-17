@@ -1,0 +1,12 @@
+Objectives
+----------
+Starting with seed URL crawl 2 child pages.
+
+tail recursion
+case classes
+yield
+
+google: scala map, flatmap - brunton spall ?
+http://www.brunton-spall.co.uk/post/2011/12/02/map-map-and-flatmap-in-scala/
+
+

@@ -1,14 +1,10 @@
 package com.technophobia.lotbot.crawlr
 
-import org.junit.runner.RunWith
-import org.scalatest.FeatureSpec
-import org.scalatest.GivenWhenThen
-import org.scalatest.Matchers
-import org.scalatest.junit.JUnitRunner
-import org.scalatest.BeforeAndAfterAll
-import sun.net.www.http.HttpClient
-import java.net.URL
 import com.technophobia.lotbot.mock.VeryStaticInternet
+import org.junit.runner.RunWith
+import org.scalatest.{FeatureSpec, GivenWhenThen, Matchers}
+import org.scalatest.junit.JUnitRunner
+
 // look at scalatest eclipse plugin
 // also funsuite
 @RunWith(classOf[JUnitRunner])
@@ -25,8 +21,13 @@ class TestCrawlr extends FeatureSpec with GivenWhenThen with Matchers with VeryS
     scenario("Make request to index of simple site page") {
 
       Given("A site is up and page exists")
-      val notABotYet = HttpClient.New(new URL("http://localhost:8889/index.html"))
-
+      Crawlr.main(Array("http://localhost:8889/index.html"))
     }
+  }
+
+    scenario("Make request to a page that doesn't exist") {
+
+      Given("A site is up and a page that doesn't exists I don't fal in a heap")
+      Crawlr.main(Array("http://localhost:8889/this-url-returns-404"))
   }
 }
