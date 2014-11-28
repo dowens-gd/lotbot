@@ -1,5 +1,5 @@
 //
-// Adapted from sample at  
+// Adapted from sample at
 // https://raw.githubusercontent.com/mashupbots/socko/master/socko-examples/src/main/scala/org/mashupbots/socko/examples/benchmark/BenchmarkApp.scala
 //
 
@@ -40,7 +40,7 @@ trait VeryStaticInternet extends Suite with BeforeAndAfterAll {
     webServer.stop();
   }
 
-  protected var siteAlias = "substeps"
+  protected val siteAlias = "substeps"
   protected val rootSiteDirectory = new File("src/test/resources/sites/" + siteAlias).getAbsolutePath()
   protected val port = 8889
 
@@ -71,7 +71,7 @@ trait VeryStaticInternet extends Suite with BeforeAndAfterAll {
 	  # processed per actor before the thread jumps to the next actor.
 	  # Set to 1 for as fair as possible.
 	  throughput = 100
-	} 
+	}
     akka{
 	  loggers = ["akka.event.slf4j.Slf4jLogger"]
 	  loglevel=DEBUG

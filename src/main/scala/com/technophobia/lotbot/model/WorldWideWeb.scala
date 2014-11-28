@@ -6,7 +6,7 @@ import org.scala_tools.time.Imports._
 /**
  * Created by dowens on 14/11/14.
  */
-case class RequestResponse(url: String, httpStatus :Int, lastTested :DateTime, parsedDoc: Option[Document])
+case class RequestResponse(lastTested :DateTime, httpStatus :String, url: String, parsedDoc: Option[Document])
 
 object WorldWideWeb {
 
